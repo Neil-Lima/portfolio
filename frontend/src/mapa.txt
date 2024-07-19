@@ -1,0 +1,15 @@
+src
+  components
+    AboutComp.jsx
+    AcademicFormationsComp.jsx
+    CertificationComp.jsx
+    FooterComp.jsx
+    FormContactComp.jsx
+    HeroComp.jsx
+    NavbarComp.jsx
+    ProjectsComp.jsx
+    SkillsComp.jsx
+  pages
+    HomePage.jsx
+  routes
+    Rotas.jsx
