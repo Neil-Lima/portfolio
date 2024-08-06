@@ -80,7 +80,7 @@ const HeroComp = () => {
       <ContentWrapper className="container text-center">
         <ProfileImg src="/path-to-your-profile-image.jpg" alt="Victor Neil" />
         <Title>Victor Neil Barata Lima</Title>
-        <Subtitle>Desenvolvedor Full Stack | React.js Specialist</Subtitle>
+        <Subtitle>Desenvolvedor Full Stack | React.js e Node.js</Subtitle>
         <ContactButton href="#contato">Entre em Contato</ContactButton>
       </ContentWrapper>
     </HeaderWrapper>
