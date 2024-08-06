@@ -121,7 +121,7 @@ const ContactForm = styled(Form)`
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="message">
                   <FormLabel isDarkMode={isDarkMode}>Mensagem</FormLabel>
-                  <FormTextArea as="textarea" rows={5} required isDarkMode={isDarkMode} style={{ width: '100%' }} />
+                  <FormTextArea as="textarea" rows={5} required isDarkMode={isDarkMode} />
                 </Form.Group>
                 <SubmitButton type="submit" isDarkMode={isDarkMode}>Enviar</SubmitButton>
               </ContactForm>
