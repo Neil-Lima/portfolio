@@ -1,0 +1,12 @@
+[build]
+  base = "portfolio/frontend"
+  publish = "build"
+  command = "cd frontend && npm install && npm run build"
+
+[build.environment]
+  NODE_VERSION = "14"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
