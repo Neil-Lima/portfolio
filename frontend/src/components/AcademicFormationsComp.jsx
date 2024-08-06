@@ -1,48 +1,88 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useTheme } from '../context/ThemeContext';
+
+const SectionTitle = styled.h2`
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
+  text-shadow: ${props => props.isDarkMode ? '0 0 5px #4cc9f0, 0 0 10px #4cc9f0' : 'none'};
+`;
+
+const TimelineSection = styled.section`
+  padding: 70px 0;
+  background-color: ${props => props.isDarkMode ? '#16213e' : '#f8f9fa'};
+  transition: background-color 0.3s ease;
+`;
+
+const Timeline = styled.div`
+  position: relative;
+  padding: 50px 0;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: ${props => props.isDarkMode ? 'linear-gradient(#3a0ca3, #4cc9f0)' : 'linear-gradient(#3a0ca3, #7209b7)'};
+    transform: translateX(-50%);
+  }
+`;
+
+const EducationItem = styled.div`
+  position: relative;
+  margin-bottom: 50px;
+  padding: 20px;
+  background: ${props => props.isDarkMode 
+    ? 'linear-gradient(145deg, #1e2a4a, #1a1b26)'
+    : 'linear-gradient(145deg, #f0f1f3, #ffffff)'};
+  border-radius: 10px;
+  box-shadow: ${props => props.isDarkMode
+    ? '0 0 15px rgba(76, 201, 240, 0.3)'
+    : '0 0 15px rgba(0, 0, 0, 0.1)'};
+  width: calc(50% - 30px);
+  color: ${props => props.isDarkMode ? '#e0e1dd' : '#16213e'};
+
+  &:nth-child(odd) {
+    margin-left: auto;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    background-color: #f72585;
+    border-radius: 50%;
+    ${props => props.isDarkMode ? 'box-shadow: 0 0 10px #f72585;' : ''}
+  }
+
+  &:nth-child(odd):before {
+    left: -40px;
+  }
+
+  &:nth-child(even):before {
+    right: -40px;
+  }
+`;
+
+const EducationTitle = styled.h5`
+  color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
+  margin-bottom: 10px;
+`;
+
+const EducationInstitution = styled.h6`
+  color: ${props => props.isDarkMode ? '#f72585' : '#7209b7'};
+  margin-bottom: 10px;
+`;
 
 const AcademicFormationsComp = () => {
   const { isDarkMode } = useTheme();
-
-  const sectionTitleStyle = {
-    position: 'relative',
-    display: 'inline-block',
-    marginBottom: '30px',
-    fontWeight: 700,
-    color: '#4cc9f0',
-  };
-
-  const timelineStyle = {
-    position: 'relative',
-    padding: '50px 0',
-  };
-
-  const timelineBeforeStyle = {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: '50%',
-    width: '2px',
-    height: '100%',
-    background: 'linear-gradient(#3a0ca3, #4cc9f0)',
-    transform: 'translateX(-50%)',
-  };
-
-  const educationItemStyle = {
-    position: 'relative',
-    marginBottom: '50px',
-    color: isDarkMode ? '#e0e1dd' : '#16213e',
-  };
-
-  const educationItemBeforeStyle = {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    width: '20px',
-    height: '20px',
-    backgroundColor: '#f72585',
-    borderRadius: '50%',
-  };
 
   const educations = [
     {
@@ -60,21 +100,21 @@ const AcademicFormationsComp = () => {
   ];
 
   return (
-    <section id="formacao" className="mb-5 fade-in">
-      <h2 style={sectionTitleStyle}>Formação Acadêmica</h2>
-      <div style={timelineStyle}>
-        <div style={timelineBeforeStyle}></div>
-        {educations.map((edu, index) => (
-          <div key={index} style={{...educationItemStyle, [index % 2 === 0 ? 'marginRight' : 'marginLeft']: '50%', textAlign: index % 2 === 0 ? 'right' : 'left'}}>
-            <div style={{...educationItemBeforeStyle, [index % 2 === 0 ? 'right' : 'left']: '-60px'}}></div>
-            <h5>{edu.title}</h5>
-            <h6>{edu.institution}</h6>
-            <p>{edu.period}</p>
-            <p>{edu.description}</p>
-          </div>
-        ))}
+    <TimelineSection id="formacao" className="fade-in" isDarkMode={isDarkMode}>
+      <div className="container">
+        <SectionTitle isDarkMode={isDarkMode}>Formação Acadêmica</SectionTitle>
+        <Timeline isDarkMode={isDarkMode}>
+          {educations.map((edu, index) => (
+            <EducationItem key={index} isDarkMode={isDarkMode}>
+              <EducationTitle isDarkMode={isDarkMode}>{edu.title}</EducationTitle>
+              <EducationInstitution isDarkMode={isDarkMode}>{edu.institution}</EducationInstitution>
+              <p>{edu.period}</p>
+              <p>{edu.description}</p>
+            </EducationItem>
+          ))}
+        </Timeline>
       </div>
-    </section>
+    </TimelineSection>
   );
 };
 

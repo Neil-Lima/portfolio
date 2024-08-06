@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Row, Col, Card, Button, Modal, Image } from 'react-bootstrap';
+import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faChrome } from '@fortawesome/free-brands-svg-icons';
 import { useTheme } from '../context/ThemeContext';
-import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
   from {
@@ -14,6 +14,45 @@ const fadeIn = keyframes`
     opacity: 1;
     transform: perspective(1000px) rotateX(0) translateY(0);
   }
+`;
+
+const SectionTitle = styled.h2`
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
+  text-shadow: ${props => props.isDarkMode ? '0 0 5px #4cc9f0, 0 0 10px #4cc9f0' : 'none'};
+`;
+
+const ProjectSection = styled.section`
+  padding: 70px 0;
+  background-color: ${props => props.isDarkMode ? '#16213e' : '#f8f9fa'};
+  transition: background-color 0.3s ease;
+`;
+
+const ProjectCard = styled(Card)`
+  transition: all 0.3s ease;
+  background: ${props => props.isDarkMode 
+    ? 'linear-gradient(145deg, #1e2a4a, #1a1b26)'
+    : 'linear-gradient(145deg, #f0f1f3, #ffffff)'};
+  box-shadow: ${props => props.isDarkMode
+    ? '0 0 15px rgba(76, 201, 240, 0.3)'
+    : '0 0 15px rgba(0, 0, 0, 0.1)'};
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${props => props.isDarkMode
+      ? '0 0 20px rgba(76, 201, 240, 0.5)'
+      : '0 0 20px rgba(0, 0, 0, 0.2)'};
+  }
+`;
+
+const ProjectTitle = styled(Card.Title)`
+  color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
 `;
 
 const StyledModal = styled(Modal)`
@@ -50,29 +89,24 @@ const StyledModal = styled(Modal)`
   }
 `;
 
+const ProjectLink = styled(Button)`
+  background-color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
+  border: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: ${props => props.isDarkMode ? '#f72585' : '#7209b7'};
+    transform: translateY(-3px);
+    box-shadow: ${props => props.isDarkMode
+      ? '0 0 10px #f72585, 0 0 20px #f72585'
+      : '0 5px 15px rgba(0, 0, 0, 0.2)'};
+  }
+`;
+
 const ProjectsComp = () => {
   const { isDarkMode } = useTheme();
   const [showModal, setShowModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
-
-  const sectionTitleStyle = {
-    position: 'relative',
-    display: 'inline-block',
-    marginBottom: '30px',
-    fontWeight: 700,
-    color: '#4cc9f0',
-  };
-
-  const cardStyle = {
-    transition: 'all 0.3s ease',
-    background: isDarkMode 
-      ? 'linear-gradient(145deg, #1e2a4a, #1a1b26)'
-      : 'linear-gradient(145deg, #f0f1f3, #e0e1dd)',
-    boxShadow: isDarkMode
-      ? '5px 5px 10px rgba(0,0,0,0.3), -5px -5px 10px rgba(255,255,255,0.05)'
-      : '5px 5px 10px rgba(0,0,0,0.1), -5px -5px 10px rgba(255,255,255,0.5)',
-    color: isDarkMode ? '#ffffff' : '#16213e',
-  };
 
   const projects = [
     {
@@ -107,55 +141,57 @@ const ProjectsComp = () => {
   };
 
   return (
-    <section id="projetos" className="mb-5 fade-in">
-      <h2 style={sectionTitleStyle}>Projetos</h2>
-      <Row>
-        {projects.map((project, index) => (
-          <Col key={index} md={4} className="mb-4">
-            <Card style={cardStyle}>
-              <Card.Img variant="top" src={project.image} />
-              <Card.Body>
-                <Card.Title>{project.title}</Card.Title>
-                <Button variant="primary" className="me-2" onClick={() => handleShowModal(project)}>
-                  Ver Detalhes
-                </Button>              
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+    <ProjectSection id="projetos" className="fade-in" isDarkMode={isDarkMode}>
+      <div className="container">
+        <SectionTitle isDarkMode={isDarkMode}>Projetos</SectionTitle>
+        <Row>
+          {projects.map((project, index) => (
+            <Col key={index} md={4} className="mb-4">
+              <ProjectCard isDarkMode={isDarkMode}>
+                <Card.Img variant="top" src={project.image} />
+                <Card.Body>
+                  <ProjectTitle isDarkMode={isDarkMode}>{project.title}</ProjectTitle>
+                  <Button variant="primary" onClick={() => handleShowModal(project)}>
+                    Ver Detalhes
+                  </Button>              
+                </Card.Body>
+              </ProjectCard>
+            </Col>
+          ))}
+        </Row>
 
-      <StyledModal 
-        show={showModal} 
-        onHide={() => setShowModal(false)} 
-        size="lg" 
-        centered
-        isDarkMode={isDarkMode}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedProject?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Row>
-            <Col md={6}>
-              <Image src={selectedProject?.image} fluid style={{borderRadius: '10px'}} />
-            </Col>
-            <Col md={6}>
-              <h5>Descrição</h5>
-              <p>{selectedProject?.description}</p>
-              <h5>Tecnologias Utilizadas</h5>
-              <p>{selectedProject?.technologies}</p>
-              <Button variant={isDarkMode ? "outline-light" : "primary"} className="me-2" href={selectedProject?.github} target="_blank">
-                <FontAwesomeIcon icon={faGithub} /> Repositório
-              </Button>
-              <Button variant={isDarkMode ? "outline-success" : "success"} href={selectedProject?.liveDemo} target="_blank">
-                <FontAwesomeIcon icon={faChrome} /> Ver Demo
-              </Button>
-            </Col>
-          </Row>
-        </Modal.Body>
-      </StyledModal>
-    </section>
+        <StyledModal 
+          show={showModal} 
+          onHide={() => setShowModal(false)} 
+          size="lg" 
+          centered
+          isDarkMode={isDarkMode}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>{selectedProject?.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Row>
+              <Col md={6}>
+                <Image src={selectedProject?.image} fluid style={{borderRadius: '10px'}} />
+              </Col>
+              <Col md={6}>
+                <h5>Descrição</h5>
+                <p>{selectedProject?.description}</p>
+                <h5>Tecnologias Utilizadas</h5>
+                <p>{selectedProject?.technologies}</p>
+                <ProjectLink variant="outline-primary" className="me-2" href={selectedProject?.github} target="_blank" isDarkMode={isDarkMode}>
+                  <FontAwesomeIcon icon={faGithub} /> Repositório
+                </ProjectLink>
+                <ProjectLink variant="outline-success" href={selectedProject?.liveDemo} target="_blank" isDarkMode={isDarkMode}>
+                  <FontAwesomeIcon icon={faChrome} /> Ver Demo
+                </ProjectLink>
+              </Col>
+            </Row>
+          </Modal.Body>
+        </StyledModal>
+      </div>
+    </ProjectSection>
   );
 };
 
