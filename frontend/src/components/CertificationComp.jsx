@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col, Card } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useTheme } from '../context/ThemeContext';
+import { FaMedal } from 'react-icons/fa';
 
 const SectionTitle = styled.h2`
   position: relative;
@@ -26,9 +27,10 @@ const CertificationCard = styled(Card)`
   box-shadow: ${props => props.isDarkMode
     ? '0 0 15px rgba(76, 201, 240, 0.3)'
     : '0 0 15px rgba(0, 0, 0, 0.1)'};
-  border: none;
+  border: 2px solid ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 
   &:hover {
     transform: translateY(-5px);
@@ -36,20 +38,48 @@ const CertificationCard = styled(Card)`
       ? '0 0 20px rgba(76, 201, 240, 0.5)'
       : '0 0 20px rgba(0, 0, 0, 0.2)'};
   }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('path_to_certificate_texture.png') repeat;
+    opacity: 0.1;
+    pointer-events: none;
+  }
 `;
 
 const CardTitle = styled(Card.Title)`
   color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+`;
+
+const MedalIcon = styled(FaMedal)`
+  font-size: 2rem;
+  color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
+  margin-bottom: 10px;
+`;
+
+const CertDate = styled.p`
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+  color: ${props => props.isDarkMode ? '#a0a0a0' : '#666666'};
 `;
 
 const CertificationComp = () => {
   const { isDarkMode } = useTheme();
 
   const certifications = [
-    "Programação de algoritmos escaláveis",
-    "Programação de sistemas de informação",
-    "Programação para dispositivos móveis",
-    "Programação para internet"
+    { name: "Programação de algoritmos escaláveis", date: "Junho 2022" },
+    { name: "Programação de sistemas de informação", date: "Agosto 2022" },
+    { name: "Programação para dispositivos móveis", date: "Outubro 2022" },
+    { name: "Programação para internet", date: "Dezembro 2022" }
   ];
 
   return (
@@ -60,8 +90,10 @@ const CertificationComp = () => {
           {certifications.map((cert, index) => (
             <Col key={index} md={6} className="mb-4">
               <CertificationCard isDarkMode={isDarkMode}>
-                <Card.Body>
-                  <CardTitle isDarkMode={isDarkMode}>{cert}</CardTitle>
+                <Card.Body className="text-center">
+                  <MedalIcon isDarkMode={isDarkMode} />
+                  <CardTitle isDarkMode={isDarkMode}>{cert.name}</CardTitle>
+                  <CertDate isDarkMode={isDarkMode}>{cert.date}</CertDate>
                 </Card.Body>
               </CertificationCard>
             </Col>
