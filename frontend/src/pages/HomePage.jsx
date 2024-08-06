@@ -3,6 +3,7 @@ import { useTheme } from '../context/ThemeContext';
 import NavbarComp from '../components/NavbarComp';
 import FooterComp from '../components/FooterComp';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styled from 'styled-components';
 
 const HeroComp = lazy(() => import('../components/HeroComp'));
 const AboutComp = lazy(() => import('../components/AboutComp'));
@@ -12,36 +13,58 @@ const AcademicFormationsComp = lazy(() => import('../components/AcademicFormatio
 const CertificationComp = lazy(() => import('../components/CertificationComp'));
 const FormContactComp = lazy(() => import('../components/FormContactComp'));
 
-const LoadingSpinner = () => (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-    <div style={{ border: '4px solid #f3f3f3', borderTop: '4px solid #3498db', borderRadius: '50%', width: '40px', height: '40px', animation: 'spin 1s linear infinite' }} />
-  </div>
-);
+const PageWrapper = styled.div`
+  background-color: ${props => props.isDarkMode ? '#16213e' : '#f8f9fa'};
+  color: ${props => props.isDarkMode ? '#e0e1dd' : '#16213e'};
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+`;
+
+const MainContent = styled.main`
+  padding: 5vh 0;
+`;
+
+const LoadingSpinner = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &::after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
 
 const HomePage = () => {
   const { isDarkMode } = useTheme();
 
   return (
-    <div style={{
-      backgroundColor: isDarkMode ? '#16213e' : '#f8f9fa',
-      color: isDarkMode ? '#e0e1dd' : '#16213e',
-      minHeight: '100vh',
-      transition: 'background-color 0.3s ease, color 0.3s ease'
-    }}>
+    <PageWrapper isDarkMode={isDarkMode}>
       <NavbarComp />
-      <Suspense fallback={<LoadingSpinner />}>
+      <Suspense fallback={<LoadingSpinner isDarkMode={isDarkMode} />}>
         <HeroComp />
-        <main className="container my-5">
+        <MainContent className="container">
           <AboutComp />
           <SkillsComp />
           <ProjectsComp />
           <AcademicFormationsComp />
           <CertificationComp />
           <FormContactComp />
-        </main>
+        </MainContent>
       </Suspense>
       <FooterComp />
-    </div>
+    </PageWrapper>
   );
 };
 
