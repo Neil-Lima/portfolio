@@ -76,10 +76,10 @@ const CertificationComp = () => {
   const { isDarkMode } = useTheme();
 
   const certifications = [
-    { name: "Programação de algoritmos escaláveis", date: "Junho 2022" },
-    { name: "Programação de sistemas de informação", date: "Agosto 2022" },
-    { name: "Programação para dispositivos móveis", date: "Outubro 2022" },
-    { name: "Programação para internet", date: "Dezembro 2022" }
+    { name: "Programação de algoritmos escaláveis", },
+    { name: "Programação de sistemas de informação", },
+    { name: "Programação para dispositivos móveis",  },
+    { name: "Programação para internet", }
   ];
 
   return (
@@ -93,7 +93,6 @@ const CertificationComp = () => {
                 <Card.Body className="text-center">
                   <MedalIcon isDarkMode={isDarkMode} />
                   <CardTitle isDarkMode={isDarkMode}>{cert.name}</CardTitle>
-                  <CertDate isDarkMode={isDarkMode}>{cert.date}</CertDate>
                 </Card.Body>
               </CertificationCard>
             </Col>
