@@ -8,14 +8,14 @@ import { useTheme } from '../context/ThemeContext';
 const FooterWrapper = styled.footer`
   background-color: ${props => props.isDarkMode ? '#0d1b2a' : '#f8f9fa'};
   color: ${props => props.isDarkMode ? '#e0e1dd' : '#16213e'};
-  padding: 2rem 0;
+  padding: 4vh 0;
   transition: background-color 0.3s ease;
 `;
 
 const SocialIcon = styled.a`
-  font-size: 1.5rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
-  margin: 0 10px;
+  margin: 0 2vw;
   transition: all 0.3s ease;
 
   &:hover {
@@ -26,7 +26,8 @@ const SocialIcon = styled.a`
 `;
 
 const FooterText = styled.p`
-  margin-bottom: 1rem;
+  margin-bottom: 2vh;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
 `;
 
 const FooterComp = () => {
@@ -47,4 +48,3 @@ const FooterComp = () => {
 };
 
 export default FooterComp;
-

@@ -5,21 +5,22 @@ import { useTheme } from '../context/ThemeContext';
 const SectionTitle = styled.h2`
   position: relative;
   display: inline-block;
-  margin-bottom: 30px;
+  margin-bottom: 4vh;
   font-weight: 700;
   color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
   text-shadow: ${props => props.isDarkMode ? '0 0 5px #4cc9f0, 0 0 10px #4cc9f0' : 'none'};
+  font-size: clamp(2rem, 5vw, 3rem);
 `;
 
 const TimelineSection = styled.section`
-  padding: 70px 0;
+  padding: 8vh 0;
   background-color: ${props => props.isDarkMode ? '#16213e' : '#f8f9fa'};
   transition: background-color 0.3s ease;
 `;
 
 const Timeline = styled.div`
   position: relative;
-  padding: 50px 0;
+  padding: 5vh 0;
 
   &:before {
     content: '';
@@ -31,12 +32,18 @@ const Timeline = styled.div`
     background: ${props => props.isDarkMode ? 'linear-gradient(#3a0ca3, #4cc9f0)' : 'linear-gradient(#3a0ca3, #7209b7)'};
     transform: translateX(-50%);
   }
+
+  @media (max-width: 768px) {
+    &:before {
+      left: 0;
+    }
+  }
 `;
 
 const EducationItem = styled.div`
   position: relative;
-  margin-bottom: 50px;
-  padding: 20px;
+  margin-bottom: 5vh;
+  padding: 3vh;
   background: ${props => props.isDarkMode 
     ? 'linear-gradient(145deg, #1e2a4a, #1a1b26)'
     : 'linear-gradient(145deg, #f0f1f3, #ffffff)'};
@@ -69,16 +76,31 @@ const EducationItem = styled.div`
   &:nth-child(even):before {
     right: -40px;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 20px !important;
+
+    &:before {
+      left: -30px !important;
+    }
+  }
 `;
 
 const EducationTitle = styled.h5`
   color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
-  margin-bottom: 10px;
+  margin-bottom: 1vh;
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
 `;
 
 const EducationInstitution = styled.h6`
   color: ${props => props.isDarkMode ? '#f72585' : '#7209b7'};
-  margin-bottom: 10px;
+  margin-bottom: 1vh;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+`;
+
+const EducationDescription = styled.p`
+  font-size: clamp(0.9rem, 2vw, 1rem);
 `;
 
 const AcademicFormationsComp = () => {
@@ -109,7 +131,7 @@ const AcademicFormationsComp = () => {
               <EducationTitle isDarkMode={isDarkMode}>{edu.title}</EducationTitle>
               <EducationInstitution isDarkMode={isDarkMode}>{edu.institution}</EducationInstitution>
               <p>{edu.period}</p>
-              <p>{edu.description}</p>
+              <EducationDescription>{edu.description}</EducationDescription>
             </EducationItem>
           ))}
         </Timeline>
