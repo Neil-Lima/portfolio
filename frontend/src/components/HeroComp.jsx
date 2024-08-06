@@ -9,12 +9,25 @@ const float = keyframes`
 `;
 
 const HeaderWrapper = styled.header`
-  background: ${props => props.isDarkMode
-    ? 'linear-gradient(135deg, #0d1b2a, #1b263b)'
-    : 'linear-gradient(135deg, #3a0ca3, #4cc9f0)'};
+  background: url('https://images7.alphacoders.com/133/1337527.png') no-repeat center center fixed;
+  background-size: cover;
   padding: 150px 0 100px;
   position: relative;
   overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+`;
+
+const ContentWrapper = styled.div`
+  position: relative;
+  z-index: 1;
 `;
 
 const ProfileImg = styled.img`
@@ -31,22 +44,21 @@ const Title = styled.h1`
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 20px;
-  color: #e0e1dd;
-  text-shadow: ${props => props.isDarkMode
-    ? '0 0 10px #4cc9f0, 0 0 20px #4cc9f0'
-    : '0 2px 4px rgba(0, 0, 0, 0.1)'};
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const Subtitle = styled.p`
   font-size: 1.5rem;
   margin-bottom: 30px;
-  color: #e0e1dd;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const ContactButton = styled.a`
   display: inline-block;
   padding: 10px 20px;
-  background-color: ${props => props.isDarkMode ? '#4cc9f0' : '#f72585'};
+  background-color: rgba(76, 201, 240, 0.8);
   color: #ffffff;
   text-decoration: none;
   border-radius: 25px;
@@ -54,11 +66,9 @@ const ContactButton = styled.a`
   font-weight: 600;
 
   &:hover {
-    background-color: ${props => props.isDarkMode ? '#f72585' : '#7209b7'};
+    background-color: rgba(247, 37, 133, 0.8);
     transform: translateY(-3px);
-    box-shadow: ${props => props.isDarkMode
-      ? '0 0 15px #f72585, 0 0 30px #f72585'
-      : '0 5px 15px rgba(0, 0, 0, 0.2)'};
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -66,13 +76,13 @@ const HeroComp = () => {
   const { isDarkMode } = useTheme();
 
   return (
-    <HeaderWrapper isDarkMode={isDarkMode}>
-      <div className="container text-center">
+    <HeaderWrapper>
+      <ContentWrapper className="container text-center">
         <ProfileImg src="/path-to-your-profile-image.jpg" alt="Victor Neil" />
-        <Title isDarkMode={isDarkMode}>Victor Neil Barata Lima</Title>
+        <Title>Victor Neil Barata Lima</Title>
         <Subtitle>Desenvolvedor Full Stack | React.js Specialist</Subtitle>
-        <ContactButton href="#contato" isDarkMode={isDarkMode}>Entre em Contato</ContactButton>
-      </div>
+        <ContactButton href="#contato">Entre em Contato</ContactButton>
+      </ContentWrapper>
     </HeaderWrapper>
   );
 };
