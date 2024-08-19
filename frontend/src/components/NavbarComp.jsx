@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, Container, IconButton, Box, Switch } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Container, IconButton, Box, Switch, Menu, MenuItem } from '@mui/material';
 import { styled } from '@mui/system';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useThemeContext } from '../context/ThemeContext';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -17,10 +18,13 @@ const StyledToolbar = styled(Toolbar)({
   justifyContent: 'space-between',
 });
 
-const NavButtons = styled(Box)({
+const NavButtons = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-});
+  [theme.breakpoints.down('md')]: {
+    display: 'none',
+  },
+}));
 
 const NavButton = styled(Button)(({ theme }) => ({
   color: theme.palette.common.white,
@@ -48,9 +52,17 @@ const ThemeToggle = styled(Box)(({ theme }) => ({
   marginLeft: '1rem',
 }));
 
+const MobileMenuButton = styled(IconButton)(({ theme }) => ({
+  display: 'none',
+  [theme.breakpoints.down('md')]: {
+    display: 'block',
+  },
+}));
+
 const NavbarComp = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { isDarkMode, toggleTheme } = useThemeContext();
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,7 +78,26 @@ const NavbarComp = () => {
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
+    handleClose();
   };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const menuItems = [
+    { label: 'Início', id: 'home' },
+    { label: 'Sobre', id: 'about' },
+    { label: 'Habilidades', id: 'skills' },
+    { label: 'Projetos', id: 'projects' },
+    { label: 'Formação', id: 'education' },
+    { label: 'Certificações', id: 'certifications' },
+    { label: 'Contato', id: 'contact' },
+  ];
 
   return (
     <StyledAppBar position="fixed" elevation={isScrolled ? 4 : 0}>
@@ -76,19 +107,54 @@ const NavbarComp = () => {
             Meu Portfólio
           </Typography>
           <NavButtons>
-            <NavButton onClick={() => scrollToSection('home')}>Início</NavButton>
-            <NavButton onClick={() => scrollToSection('about')}>Sobre</NavButton>
-            <NavButton onClick={() => scrollToSection('skills')}>Habilidades</NavButton>
-            <NavButton onClick={() => scrollToSection('projects')}>Projetos</NavButton>
-            <NavButton onClick={() => scrollToSection('education')}>Formação</NavButton>
-            <NavButton onClick={() => scrollToSection('certifications')}>Certificações</NavButton>
-            <NavButton onClick={() => scrollToSection('contact')}>Contato</NavButton>
+            {menuItems.map((item) => (
+              <NavButton key={item.id} onClick={() => scrollToSection(item.id)}>
+                {item.label}
+              </NavButton>
+            ))}
             <ThemeToggle>
               <Brightness7Icon />
               <Switch checked={isDarkMode} onChange={toggleTheme} color="default" />
               <Brightness4Icon />
             </ThemeToggle>
           </NavButtons>
+          <MobileMenuButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleMenu}
+          >
+            <MenuIcon />
+          </MobileMenuButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            {menuItems.map((item) => (
+              <MenuItem key={item.id} onClick={() => scrollToSection(item.id)}>
+                {item.label}
+              </MenuItem>
+            ))}
+            <MenuItem>
+              <ThemeToggle>
+                <Brightness7Icon />
+                <Switch checked={isDarkMode} onChange={toggleTheme} color="default" />
+                <Brightness4Icon />
+              </ThemeToggle>
+            </MenuItem>
+          </Menu>
         </StyledToolbar>
       </Container>
     </StyledAppBar>
