@@ -1,196 +1,148 @@
-import React, { useState } from 'react';
-import { Row, Col, Card, Button, Modal, Image } from 'react-bootstrap';
-import styled, { keyframes } from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faChrome } from '@fortawesome/free-brands-svg-icons';
-import { useTheme } from '../context/ThemeContext';
+import React from 'react';
+import { Container, Typography, Grid, Card, CardContent, CardMedia, CardActions, Button, Box, Chip } from '@mui/material';
+import { styled } from '@mui/system';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LaunchIcon from '@mui/icons-material/Launch';
+import { useTheme } from '@mui/material/styles';
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    transform: perspective(1000px) rotateX(-10deg) translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: perspective(1000px) rotateX(0) translateY(0);
-  }
-`;
+const ProjectSection = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(12, 0),
+  background: theme.palette.mode === 'dark'
+    ? 'linear-gradient(45deg, #1A2980 0%, #26D0CE 100%)'
+    : 'linear-gradient(45deg, #667eea 0%, #764ba2 100%)',
+  clipPath: 'polygon(0 5%, 100% 0%, 100% 95%, 0% 100%)',
+}));
 
-const SectionTitle = styled.h2`
-  position: relative;
-  display: inline-block;
-  margin-bottom: 30px;
-  font-weight: 700;
-  color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
-  text-shadow: ${props => props.isDarkMode ? '0 0 5px #4cc9f0, 0 0 10px #4cc9f0' : 'none'};
-`;
+const ProjectCard = styled(Card)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  borderRadius: '20px',
+  overflow: 'hidden',
+  background: theme.palette.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.05)'
+    : 'rgba(255, 255, 255, 0.1)',
+  backdropFilter: 'blur(10px)',
+  border: theme.palette.mode === 'dark'
+    ? '1px solid rgba(255, 255, 255, 0.1)'
+    : '1px solid rgba(255, 255, 255, 0.2)',
+  transition: 'all 0.3s cubic-bezier(.25,.8,.25,1)',
+  '&:hover': {
+    transform: 'translateY(-10px)',
+    boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+  },
+}));
 
-const ProjectSection = styled.section`
-  padding: 70px 0;
-  background-color: ${props => props.isDarkMode ? '#16213e' : '#f8f9fa'};
-  transition: background-color 0.3s ease;
-`;
+const ProjectMedia = styled(CardMedia)({
+  height: 250,
+  position: 'relative',
+  overflow: 'hidden',
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.7))',
+  },
+});
 
-const ProjectCard = styled(Card)`
-  transition: all 0.3s ease;
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(145deg, #1e2a4a, #1a1b26)'
-    : 'linear-gradient(145deg, #f0f1f3, #ffffff)'};
-  box-shadow: ${props => props.isDarkMode
-    ? '0 0 15px rgba(76, 201, 240, 0.3)'
-    : '0 0 15px rgba(0, 0, 0, 0.1)'};
-  border: none;
-  border-radius: 10px;
-  overflow: hidden;
+const ProjectTitle = styled(Typography)({
+  position: 'absolute',
+  bottom: 20,
+  left: 20,
+  color: 'white',
+  zIndex: 1,
+  fontWeight: 'bold',
+  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+});
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${props => props.isDarkMode
-      ? '0 0 20px rgba(76, 201, 240, 0.5)'
-      : '0 0 20px rgba(0, 0, 0, 0.2)'};
-  }
-`;
+const TechChip = styled(Chip)(({ theme }) => ({
+  margin: theme.spacing(0.5),
+  backgroundColor: theme.palette.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.1)'
+    : 'rgba(255, 255, 255, 0.2)',
+  color: theme.palette.mode === 'dark'
+    ? theme.palette.primary.light
+    : 'white',
+  backdropFilter: 'blur(5px)',
+  '&:hover': {
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
 
-const ProjectTitle = styled(Card.Title)`
-  color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
-`;
-
-const StyledModal = styled(Modal)`
-  .modal-content {
-    animation: ${fadeIn} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    background: ${props => props.isDarkMode ? 
-      'linear-gradient(145deg, #1e2a4a, #2a3b5d)' : 
-      'linear-gradient(145deg, #f0f1f3, #ffffff)'};
-  }
-
-  .modal-header, .modal-body {
-    border: none;
-    background: transparent;
-  }
-
-  .modal-header {
-    padding: 20px 30px;
-  }
-
-  .modal-body {
-    padding: 30px;
-  }
-
-  .modal-title, .modal-body {
-    color: ${props => props.isDarkMode ? '#ffffff' : '#16213e'};
-  }
-
-  h5 {
-    color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
-  }
-`;
-
-const ProjectLink = styled(Button)`
-  background-color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
-  border: none;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: ${props => props.isDarkMode ? '#f72585' : '#7209b7'};
-    transform: translateY(-3px);
-    box-shadow: ${props => props.isDarkMode
-      ? '0 0 10px #f72585, 0 0 20px #f72585'
-      : '0 5px 15px rgba(0, 0, 0, 0.2)'};
-  }
-`;
+const projects = [
+  {
+    title: 'Nexus: E-commerce Revolution',
+    description: 'Um ecossistema de e-commerce inovador com IA integrada para recomendações personalizadas e gestão de inventário em tempo real.',
+    image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+    github: 'https://github.com/yourusername/nexus-ecommerce',
+    demo: 'https://nexus-demo.com',
+    technologies: ['React', 'Node.js', 'MongoDB', 'TensorFlow'],
+  },
+  {
+    title: 'Quantum Task',
+    description: 'Plataforma de gerenciamento de tarefas com interface futurista, colaboração em tempo real e integração com IA para priorização inteligente.',
+    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+    github: 'https://github.com/yourusername/quantum-task',
+    demo: 'https://quantum-task-demo.com',
+    technologies: ['Vue.js', 'GraphQL', 'Prisma', 'WebSocket'],
+  },
+  {
+    title: 'ClimaSense AI',
+    description: 'Dashboard meteorológico avançado com previsões hiperpersonalizadas usando aprendizado de máquina e visualizações de dados imersivas.',
+    image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
+    github: 'https://github.com/yourusername/climasense-ai',
+    demo: 'https://climasense-demo.com',
+    technologies: ['React', 'Python', 'TensorFlow', 'D3.js'],
+  },
+];
 
 const ProjectsComp = () => {
-  const { isDarkMode } = useTheme();
-  const [showModal, setShowModal] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
-
-  const projects = [
-    {
-      title: "E-commerce Platform",
-      description: "Uma plataforma de comércio eletrônico completa com carrinho de compras, sistema de pagamento e painel de administração.",
-      technologies: "React, Node.js, MongoDB",
-      image: "/path-to-ecommerce-image.jpg",
-      github: "https://github.com/yourusername/ecommerce-project",
-      liveDemo: "https://your-ecommerce-demo.com"
-    },
-    {
-      title: "Task Management App",
-      description: "Um aplicativo de gerenciamento de tarefas com recursos de colaboração em tempo real e integração de calendário.",
-      technologies: "React Native, Firebase",
-      image: "/path-to-taskmanager-image.jpg",
-      github: "https://github.com/yourusername/task-manager-app",
-      liveDemo: "https://your-taskmanager-demo.com"
-    },
-    {
-      title: "Portfolio Website",
-      description: "Um site de portfólio responsivo e interativo para mostrar projetos e habilidades.",
-      technologies: "React, Bootstrap",
-      image: "/path-to-portfolio-image.jpg",
-      github: "https://github.com/yourusername/portfolio-website",
-      liveDemo: "https://your-portfolio-demo.com"
-    }
-  ];
-
-  const handleShowModal = (project) => {
-    setSelectedProject(project);
-    setShowModal(true);
-  };
+  const theme = useTheme();
 
   return (
-    <ProjectSection id="projetos" className="fade-in" isDarkMode={isDarkMode}>
-      <div className="container">
-        <SectionTitle isDarkMode={isDarkMode}>Projetos</SectionTitle>
-        <Row>
+    <ProjectSection id="projects">
+      <Container maxWidth="lg">
+        <Typography variant="h2" align="center" gutterBottom sx={{ 
+          fontWeight: 'bold', 
+          color: 'white', 
+          marginBottom: 8,
+          textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+        }}>
+          Projetos Inovadores
+        </Typography>
+        <Grid container spacing={6}>
           {projects.map((project, index) => (
-            <Col key={index} md={4} className="mb-4">
-              <ProjectCard isDarkMode={isDarkMode}>
-                <Card.Img variant="top" src={project.image} />
-                <Card.Body>
-                  <ProjectTitle isDarkMode={isDarkMode}>{project.title}</ProjectTitle>
-                  <Button variant="primary" onClick={() => handleShowModal(project)}>
-                    Ver Detalhes
-                  </Button>              
-                </Card.Body>
+            <Grid item key={index} xs={12} md={6} lg={4}>
+              <ProjectCard elevation={0}>
+                <ProjectMedia image={project.image} title={project.title}>
+                  <ProjectTitle variant="h5">{project.title}</ProjectTitle>
+                </ProjectMedia>
+                <CardContent>
+                  <Typography variant="body2" color={theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'textSecondary'} sx={{ mb: 2 }}>
+                    {project.description}
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', mb: 2 }}>
+                    {project.technologies.map((tech, i) => (
+                      <TechChip key={i} label={tech} size="small" />
+                    ))}
+                  </Box>
+                </CardContent>
+                <CardActions sx={{ justifyContent: 'space-between', px: 2, pb: 2 }}>
+                  <Button variant="contained" color="primary" startIcon={<GitHubIcon />} href={project.github} target="_blank">
+                    GitHub
+                  </Button>
+                  <Button variant="outlined" color="secondary" endIcon={<LaunchIcon />} href={project.demo} target="_blank">
+                    Demo
+                  </Button>
+                </CardActions>
               </ProjectCard>
-            </Col>
+            </Grid>
           ))}
-        </Row>
-
-        <StyledModal 
-          show={showModal} 
-          onHide={() => setShowModal(false)} 
-          size="lg" 
-          centered
-          isDarkMode={isDarkMode}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>{selectedProject?.title}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Row>
-              <Col md={6}>
-                <Image src={selectedProject?.image} fluid style={{borderRadius: '10px'}} />
-              </Col>
-              <Col md={6}>
-                <h5>Descrição</h5>
-                <p>{selectedProject?.description}</p>
-                <h5>Tecnologias Utilizadas</h5>
-                <p>{selectedProject?.technologies}</p>
-                <ProjectLink variant="outline-primary" className="me-2" href={selectedProject?.github} target="_blank" isDarkMode={isDarkMode}>
-                  <FontAwesomeIcon icon={faGithub} /> Repositório
-                </ProjectLink>
-                <ProjectLink variant="outline-success" href={selectedProject?.liveDemo} target="_blank" isDarkMode={isDarkMode}>
-                  <FontAwesomeIcon icon={faChrome} /> Ver Demo
-                </ProjectLink>
-              </Col>
-            </Row>
-          </Modal.Body>
-        </StyledModal>
-      </div>
+        </Grid>
+      </Container>
     </ProjectSection>
   );
 };

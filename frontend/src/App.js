@@ -1,12 +1,16 @@
-import React from 'react';
-import { ThemeProvider } from './context/ThemeContext';
-import Rotas from './routes/Rotas';
+import React from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import Rotas from "./routes/Rotas";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { ThemeContextProvider } from "./context/ThemeContext";
+
 
 function App() {
   return (
-    <ThemeProvider>
+    <ThemeContextProvider>
       <Rotas />
-    </ThemeProvider>
+    </ThemeContextProvider>
   );
 }
 

@@ -1,95 +1,122 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
-import styled from 'styled-components';
-import { useTheme } from '../context/ThemeContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHtml5, faCss3Alt, faJs, faReact, faNodeJs, faGitAlt, faBootstrap } from '@fortawesome/free-brands-svg-icons';
+import { Container, Typography, Grid, Paper, Tooltip, Zoom, Fade } from '@mui/material';
+import { styled } from '@mui/system';
+import { useTheme } from '@mui/material/styles';
 
-const SectionTitle = styled.h2`
-  position: relative;
-  display: inline-block;
-  margin-bottom: 30px;
-  font-weight: 700;
-  color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
-  text-shadow: ${props => props.isDarkMode ? '0 0 5px #4cc9f0, 0 0 10px #4cc9f0' : 'none'};
-`;
+const SkillCard = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+  background: theme.palette.mode === 'dark'
+    ? 'linear-gradient(145deg, #1e1e1e, #2c2c2c)'
+    : 'linear-gradient(145deg, #ffffff, #f0f0f0)',
+  borderRadius: '12px',
+  boxShadow: theme.palette.mode === 'dark'
+    ? '3px 3px 10px #0d0d0d, -3px -3px 10px #2f2f2f'
+    : '3px 3px 10px #d1d1d1, -3px -3px 10px #ffffff',
+  '&:hover': {
+    transform: 'translateY(-5px) scale(1.03)',
+    boxShadow: theme.palette.mode === 'dark'
+      ? '5px 5px 15px #0d0d0d, -5px -5px 15px #2f2f2f'
+      : '5px 5px 15px #d1d1d1, -5px -5px 15px #ffffff',
+  },
+}));
 
-const SkillBadge = styled.span`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 18px;
-  margin: 8px;
-  border-radius: 25px;
-  font-weight: 600;
-  color: ${props => props.isDarkMode ? '#ffffff' : '#3a0ca3'};
-  background: ${props => props.isDarkMode 
-    ? `linear-gradient(145deg, ${props.color}, #4cc9f0)`
-    : 'linear-gradient(145deg, #f0f1f3, #ffffff)'};
-  box-shadow: ${props => props.isDarkMode
-    ? `0 0 10px ${props.color}80, 0 0 20px ${props.color}40`
-    : '3px 3px 6px rgba(0,0,0,0.1), -3px -3px 6px rgba(255,255,255,0.5)'};
-  transition: all 0.3s ease;
-  cursor: pointer;
+const SkillImage = styled('img')({
+  width: 50,
+  height: 50,
+  marginBottom: 8,
+  transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+  '&:hover': {
+    transform: 'rotate(360deg) scale(1.1)',
+  },
+});
 
-  &:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: ${props => props.isDarkMode
-      ? `0 0 15px ${props.color}A0, 0 0 30px ${props.color}60`
-      : '5px 5px 10px rgba(0,0,0,0.2), -5px -5px 10px rgba(255,255,255,0.7)'};
-  }
-
-  svg {
-    margin-right: 8px;
-  }
-`;
-
-const SkillsSection = styled.section`
-  padding: 70px 0;
-  background-color: ${props => props.isDarkMode ? '#16213e' : '#f8f9fa'};
-  transition: background-color 0.3s ease;
-`;
+const skills = [
+  { name: 'HTML', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+  { name: 'CSS', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+  { name: 'JavaScript', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+  { name: 'TypeScript', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+  { name: 'Bootstrap', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+  { name: 'Materialize', image: 'https://seeklogo.com/images/M/materialize-logo-0FCAD8A6F8-seeklogo.com.png' },
+  { name: 'React', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+  { name: 'Styled Components', image: 'https://styled-components.com/logo.png' },
+  { name: 'Chakra UI', image: 'https://avatars.githubusercontent.com/u/54212428?s=200&v=4' },
+  { name: 'Material-UI', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
+  { name: 'React Bootstrap', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg' },
+  { name: 'Redux', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg' },
+  { name: 'GraphQL', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg' },
+  { name: 'Apollo', image: 'https://cdn.worldvectorlogo.com/logos/apollo-graphql-compact.svg' },
+  { name: 'React Hooks', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+  { name: 'React Spring', image: 'https://react-spring.dev/favicon.ico' },
+  { name: 'React Router', image: 'https://reactrouter.com/_brand/react-router-mark-color.svg' },
+  { name: 'React Hook Form', image: 'https://avatars.githubusercontent.com/u/53986236?s=200&v=4' },
+  { name: 'React Query', image: 'https://seeklogo.com/images/R/react-query-logo-1340EA4CE9-seeklogo.com.png' },
+  { name: 'Git', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+  { name: 'GitHub', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+  { name: 'Node.js', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+  { name: 'MongoDB', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+  { name: 'MySQL', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+  { name: 'Bootstrap Studio', image: 'https://bootstrapstudio.io/assets/img/logo_128.png' },
+  { name: 'GitHub Desktop', image: 'https://desktop.github.com/images/desktop-icon.svg' },
+  { name: 'Nest.js', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/NestJS.svg' },
+  { name: 'Next.js', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+];
 
 const SkillsComp = () => {
-  const { isDarkMode } = useTheme();
-
-  const skills = [
-    { name: "HTML5", icon: faHtml5, color: "#E44D26" },
-    { name: "CSS3", icon: faCss3Alt, color: "#264DE4" },
-    { name: "JavaScript", icon: faJs, color: "#F0DB4F" },
-    { name: "React", icon: faReact, color: "#61DAFB" },
-    { name: "Redux", color: "#764ABC" },
-    { name: "Node.js", icon: faNodeJs, color: "#339933" },
-    { name: "Nest.js", color: "#000000" },
-    { name: "MongoDB", color: "#47A248" },
-    { name: "MySQL", color: "#4479A1" },
-    { name: "Git", icon: faGitAlt, color: "#F05032" },
-    { name: "Bootstrap", icon: faBootstrap, color: "#7952B3" },
-    { name: "Materialize", color: "#EB7077" },
-    { name: "Styled-components", color: "#DB7093" },
-    { name: "Chakra UI", color: "#319795" },
-    { name: "Material UI", color: "#0081CB" },
-    { name: "React Router", color: "#CA4245" },
-    { name: "React Query", color: "#FF4154" },
-    { name: "GraphQL", color: "#E10098" }
-  ];
+  const theme = useTheme();
 
   return (
-    <SkillsSection id="habilidades" className="fade-in" isDarkMode={isDarkMode}>
-      <div className="container">
-        <SectionTitle isDarkMode={isDarkMode}>Habilidades e Competências</SectionTitle>
-        <Row>
-          {skills.map((skill, index) => (
-            <Col key={index} lg={3} md={4} sm={6} xs={6} className="mb-4 text-center">
-              <SkillBadge isDarkMode={isDarkMode} color={skill.color}>
-                {skill.icon && <FontAwesomeIcon icon={skill.icon} />}
-                {skill.name}
-              </SkillBadge>
-            </Col>
-          ))}
-        </Row>
-      </div>
-    </SkillsSection>
+    <Container maxWidth="lg" sx={{ py: 6 }} id="skills">
+      <Typography variant="h3" gutterBottom align="center" sx={{ 
+        mb: 4, 
+        fontWeight: 'bold', 
+        background: theme.palette.mode === 'dark'
+          ? 'linear-gradient(135deg, #BB86FC 0%, #3700B3 50%, #03DAC6 100%)'
+          : 'linear-gradient(135deg, #FF6B6B 0%, #6A5ACD 50%, #00CED1 100%)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+      }}>
+        Habilidades Técnicas
+      </Typography>
+      <Grid container spacing={3}>
+        {skills.map((skill, index) => (
+          <Grid item xs={4} sm={3} md={2} lg={2} key={index}>
+            <Fade in={true} timeout={500 + index * 100}>
+              <Tooltip 
+                title={`Experiência com ${skill.name}`} 
+                TransitionComponent={Zoom} 
+                arrow 
+                placement="top"
+              >
+                <SkillCard elevation={0}>
+                  <SkillImage src={skill.image} alt={skill.name} />
+                  <Typography 
+                    variant="caption" 
+                    fontWeight="bold"
+                    sx={{
+                      background: theme.palette.mode === 'dark'
+                        ? 'linear-gradient(45deg, #BB86FC 30%, #03DAC6 90%)'
+                        : 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    {skill.name}
+                  </Typography>
+                </SkillCard>
+              </Tooltip>
+            </Fade>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 

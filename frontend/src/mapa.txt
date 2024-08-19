@@ -1,15 +1,18 @@
-src
-  components
-    AboutComp.jsx
-    AcademicFormationsComp.jsx
-    CertificationComp.jsx
-    FooterComp.jsx
-    FormContactComp.jsx
-    HeroComp.jsx
-    NavbarComp.jsx
-    ProjectsComp.jsx
-    SkillsComp.jsx
-  pages
-    HomePage.jsx
-  routes
-    Rotas.jsx
+frontend/
+├── src/
+│   ├── styles/
+│   │   └── styles.js
+│   ├── theme/
+│   │   └── theme.js
+│   ├── components/
+│   │   ├── NavbarComp.jsx
+│   │   ├── HeroSectionComp.jsx
+│   │   ├── AboutMeComp.jsx
+│   │   ├── SkillsComp.jsx
+│   │   ├── ProjectsComp.jsx
+│   │   ├── EducationComp.jsx
+│   │   ├── CertificationsComp.jsx
+│   │   ├── ContactComp.jsx
+│   │   └── FooterComp.jsx
+│   └── pages/
+│       └── HomePage.jsx

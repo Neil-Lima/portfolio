@@ -1,94 +1,97 @@
-import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-import { useTheme } from '../context/ThemeContext';
+import React, { useState, useEffect } from 'react';
+import { AppBar, Toolbar, Typography, Button, Container, IconButton, Box, Switch } from '@mui/material';
+import { styled } from '@mui/system';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import { useThemeContext } from '../context/ThemeContext';
 
-export const NAVBAR_HEIGHT = '70px';
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  background: theme.palette.mode === 'dark' 
+    ? 'linear-gradient(90deg, #1A2980 0%, #26D0CE 100%)' 
+    : 'linear-gradient(90deg, #1e3c72 0%, #2a5298 100%)',
+  boxShadow: 'none',
+  transition: 'all 0.3s ease-in-out',
+}));
 
-const StyledNavbar = styled(Navbar)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  transition: background-color 0.3s ease;
-  padding: 1rem 0;
-  background-color: ${props => props.isDarkMode
-    ? 'rgba(22, 33, 62, 0.9)'
-    : 'rgba(224, 225, 221, 0.9)'};
-  height: ${NAVBAR_HEIGHT};
-  box-shadow: ${props => props.isDarkMode
-    ? '0 2px 10px rgba(76, 201, 240, 0.1)'
-    : '0 2px 10px rgba(0, 0, 0, 0.1)'};
-`;
+const StyledToolbar = styled(Toolbar)({
+  justifyContent: 'space-between',
+});
 
-const NavLink = styled(Nav.Link)`
-  color: ${props => props.isDarkMode ? '#e0e1dd' : '#16213e'} !important;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: pointer;
+const NavButtons = styled(Box)({
+  display: 'flex',
+  alignItems: 'center',
+});
 
-  &:hover {
-    color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'} !important;
-    transform: translateY(-2px);
-  }
-`;
+const NavButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.common.white,
+  marginLeft: '1rem',
+  position: 'relative',
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    width: '0',
+    height: '2px',
+    bottom: 0,
+    left: '50%',
+    background: theme.palette.secondary.main,
+    transition: 'all 0.3s ease-in-out',
+  },
+  '&:hover::after': {
+    width: '100%',
+    left: '0',
+  },
+}));
 
-const Brand = styled(Navbar.Brand)`
-  font-weight: 700;
-  color: #4cc9f0 !important;
-  text-shadow: ${props => props.isDarkMode
-    ? '0 0 10px rgba(76, 201, 240, 0.5)'
-    : '0 0 10px rgba(58, 12, 163, 0.5)'};
-`;
-
-const ThemeToggle = styled.button`
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: ${props => props.isDarkMode ? '#e0e1dd' : '#16213e'};
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  &:hover {
-    color: ${props => props.isDarkMode ? '#4cc9f0' : '#3a0ca3'};
-    transform: rotate(15deg);
-  }
-`;
+const ThemeToggle = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  marginLeft: '1rem',
+}));
 
 const NavbarComp = () => {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { isDarkMode, toggleTheme } = useThemeContext();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      const yOffset = -70;
-      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({top: y, behavior: 'smooth'});
+      section.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <StyledNavbar expand="lg" isDarkMode={isDarkMode}>
-      <Container>
-        <Brand href="#" isDarkMode={isDarkMode}>Victor Neil</Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            {['sobre', 'habilidades', 'projetos', 'formacao', 'certificacoes', 'contato'].map((item) => (
-              <NavLink key={item} onClick={() => scrollToSection(item)} isDarkMode={isDarkMode}>
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-              </NavLink>
-            ))}
-          </Nav>
-        </Navbar.Collapse>
-        <ThemeToggle onClick={toggleTheme} isDarkMode={isDarkMode}>
-          <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
-        </ThemeToggle>
+    <StyledAppBar position="fixed" elevation={isScrolled ? 4 : 0}>
+      <Container maxWidth="lg">
+        <StyledToolbar>
+          <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', letterSpacing: 1 }}>
+            Meu Portfólio
+          </Typography>
+          <NavButtons>
+            <NavButton onClick={() => scrollToSection('home')}>Início</NavButton>
+            <NavButton onClick={() => scrollToSection('about')}>Sobre</NavButton>
+            <NavButton onClick={() => scrollToSection('skills')}>Habilidades</NavButton>
+            <NavButton onClick={() => scrollToSection('projects')}>Projetos</NavButton>
+            <NavButton onClick={() => scrollToSection('education')}>Formação</NavButton>
+            <NavButton onClick={() => scrollToSection('certifications')}>Certificações</NavButton>
+            <NavButton onClick={() => scrollToSection('contact')}>Contato</NavButton>
+            <ThemeToggle>
+              <Brightness7Icon />
+              <Switch checked={isDarkMode} onChange={toggleTheme} color="default" />
+              <Brightness4Icon />
+            </ThemeToggle>
+          </NavButtons>
+        </StyledToolbar>
       </Container>
-    </StyledNavbar>
+    </StyledAppBar>
   );
 };
 

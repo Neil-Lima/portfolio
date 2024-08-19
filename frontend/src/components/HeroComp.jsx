@@ -1,89 +1,127 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import { useTheme } from '../context/ThemeContext';
+import { Typography, Container, Button, Box } from '@mui/material';
+import { styled } from '@mui/system';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useTheme } from '@mui/material/styles';
 
-const float = keyframes`
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-`;
+const HeroSection = styled(Box)(({ theme }) => ({
+  background: theme.palette.mode === 'dark'
+    ? 'linear-gradient(135deg, #1A2980 0%, #26D0CE 100%)'
+    : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  color: theme.palette.common.white,
+  padding: theme.spacing(20, 0),
+  position: 'relative',
+  overflow: 'hidden',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'url(https://source.unsplash.com/random/1600x900?technology) no-repeat center center',
+    backgroundSize: 'cover',
+    opacity: theme.palette.mode === 'dark' ? 0.1 : 0.2,
+    zIndex: 1,
+  },
+}));
 
-const HeaderWrapper = styled.header`
-  background: url('https://images7.alphacoders.com/133/1337527.png') no-repeat center center fixed;
-  background-size: cover;
-  padding: 150px 0 100px;
-  position: relative;
-  overflow: hidden;
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-  }
-`;
+const ContentWrapper = styled(Box)({
+  position: 'relative',
+  zIndex: 2,
+  textAlign: 'center',
+});
 
-const ContentWrapper = styled.div`
-  position: relative;
-  z-index: 1;
-`;
+const HeroTitle = styled(Typography)(({ theme }) => ({
+  fontWeight: 700,
+  fontSize: '3.5rem',
+  marginBottom: theme.spacing(2),
+  textShadow: theme.palette.mode === 'dark'
+    ? '2px 2px 4px rgba(0,0,0,0.5)'
+    : '2px 2px 4px rgba(0,0,0,0.3)',
+  color: theme.palette.mode === 'dark' ? '#FFFFFF' : '#FFFFFF',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2.5rem',
+  },
+}));
 
-const ProfileImg = styled.img`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 5px solid #e0e1dd;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  animation: ${float} 3s ease-in-out infinite;
-`;
+const HeroSubtitle = styled(Typography)(({ theme }) => ({
+  fontSize: '1.5rem',
+  marginBottom: theme.spacing(4),
+  opacity: 1,
+  maxWidth: '800px',
+  margin: '0 auto',
+  color: theme.palette.mode === 'dark' ? '#E0E0E0' : '#FFFFFF',
+  textShadow: theme.palette.mode === 'dark'
+    ? '1px 1px 2px rgba(0,0,0,0.5)'
+    : '1px 1px 2px rgba(0,0,0,0.3)',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.2rem',
+  },
+}));
 
-const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #ffffff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-`;
+const CTAButton = styled(Button)(({ theme }) => ({
+  padding: theme.spacing(1.5, 4),
+  fontSize: '1.2rem',
+  fontWeight: 600,
+  borderRadius: '30px',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  transition: 'all 0.3s ease',
+  backgroundColor: theme.palette.mode === 'dark' ? '#BB86FC' : theme.palette.secondary.main,
+  color: theme.palette.mode === 'dark' ? '#000000' : '#FFFFFF',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 6px 8px rgba(0, 0, 0, 0.15)',
+    backgroundColor: theme.palette.mode === 'dark' ? '#9965F4' : theme.palette.secondary.dark,
+  },
+}));
 
-const Subtitle = styled.p`
-  font-size: 1.5rem;
-  margin-bottom: 30px;
-  color: #ffffff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-`;
-
-const ContactButton = styled.a`
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: rgba(76, 201, 240, 0.8);
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-
-  &:hover {
-    background-color: rgba(247, 37, 133, 0.8);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-`;
+const ScrollDownIcon = styled(KeyboardArrowDownIcon)(({ theme }) => ({
+  fontSize: '3rem',
+  position: 'absolute',
+  bottom: theme.spacing(4),
+  left: '50%',
+  transform: 'translateX(-50%)',
+  animation: 'bounce 2s infinite',
+  color: theme.palette.mode === 'dark' ? '#BB86FC' : theme.palette.secondary.main,
+  '@keyframes bounce': {
+    '0%, 20%, 50%, 80%, 100%': {
+      transform: 'translateY(0) translateX(-50%)',
+    },
+    '40%': {
+      transform: 'translateY(-20px) translateX(-50%)',
+    },
+    '60%': {
+      transform: 'translateY(-10px) translateX(-50%)',
+    },
+  },
+}));
 
 const HeroComp = () => {
-  const { isDarkMode } = useTheme();
+  const theme = useTheme();
 
   return (
-    <HeaderWrapper>
-      <ContentWrapper className="container text-center">
-        <ProfileImg src="/path-to-your-profile-image.jpg" alt="Victor Neil" />
-        <Title>Victor Neil Barata Lima</Title>
-        <Subtitle>Desenvolvedor Full Stack | React.js e Node.js</Subtitle>
-        <ContactButton href="#contato">Entre em Contato</ContactButton>
-      </ContentWrapper>
-    </HeaderWrapper>
+    <HeroSection id="home">
+      <Container maxWidth="md">
+        <ContentWrapper>
+          <HeroTitle variant="h1">
+            Olá, eu sou João Silva
+          </HeroTitle>
+          <HeroSubtitle variant="h5">
+            Desenvolvedor Full Stack apaixonado por criar soluções inovadoras e experiências digitais incríveis
+          </HeroSubtitle>
+          <CTAButton 
+            variant="contained" 
+            color="secondary" 
+            href="#contact"
+            size="large"
+          >
+            Entre em contato
+          </CTAButton>
+        </ContentWrapper>
+      </Container>
+      <ScrollDownIcon />
+    </HeroSection>
   );
 };
 
