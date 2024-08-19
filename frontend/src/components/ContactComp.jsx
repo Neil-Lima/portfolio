@@ -167,19 +167,19 @@ const ContactComp = () => {
               <ContactInfo>
                 <EmailIcon sx={{ marginRight: 2 }} />
                 <Typography color={theme.palette.mode === 'dark' ? '#E0E0E0' : 'inherit'}>
-                  email@exemplo.com
+                  victorneil08@gmail.com
                 </Typography>
               </ContactInfo>
               <ContactInfo>
                 <PhoneIcon sx={{ marginRight: 2 }} />
                 <Typography color={theme.palette.mode === 'dark' ? '#E0E0E0' : 'inherit'}>
-                  +55 (11) 1234-5678
+                  +55 (91) 98117-9825
                 </Typography>
               </ContactInfo>
               <ContactInfo>
                 <LocationOnIcon sx={{ marginRight: 2 }} />
                 <Typography color={theme.palette.mode === 'dark' ? '#E0E0E0' : 'inherit'}>
-                  São Paulo, SP - Brasil
+                  Belém, PA - Brasil
                 </Typography>
               </ContactInfo>
               <SocialIcons>
