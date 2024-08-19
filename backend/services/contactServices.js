@@ -16,5 +16,11 @@ exports.sendEmail = async (name, email, subject, message) => {
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
   };
 
-  await transporter.sendMail(mailOptions);
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+    throw new Error('Failed to send email');
+  }
 };

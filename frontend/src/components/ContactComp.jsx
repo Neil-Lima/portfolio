@@ -87,17 +87,22 @@ const ContactComp = () => {
         },
         body: JSON.stringify({ name, email, subject: 'Contato do Portfolio', message }),
       });
+      
+      console.log('Resposta do servidor:', await response.json());
+
       if (response.ok) {
         alert('Mensagem enviada com sucesso!');
         setName('');
         setEmail('');
         setMessage('');
       } else {
-        alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+        const errorData = await response.json();
+        console.error('Erro do servidor:', errorData);
+        alert(`Erro ao enviar mensagem: ${errorData.message || 'Tente novamente.'}`);
       }
     } catch (error) {
-      console.error('Erro:', error);
-      alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+      console.error('Erro detalhado:', error);
+      alert('Erro ao enviar mensagem. Por favor, verifique o console e tente novamente.');
     }
   };
 

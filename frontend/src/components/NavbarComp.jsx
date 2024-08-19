@@ -104,7 +104,7 @@ const NavbarComp = () => {
       <Container maxWidth="lg">
         <StyledToolbar>
           <Typography variant="h6" component="div" sx={{ fontWeight: 'bold', letterSpacing: 1 }}>
-            Meu Portfólio
+            Victor Neil
           </Typography>
           <NavButtons>
             {menuItems.map((item) => (

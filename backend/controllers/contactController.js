@@ -9,8 +9,7 @@ exports.submitContact = async (req, res) => {
     await contactServices.sendEmail(name, email, subject, message);
     res.status(201).json({ message: "Contact form submitted successfully" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error submitting contact form", error: error.message });
+    console.error('Error in submitContact:', error);
+    res.status(500).json({ message: "Error submitting contact form", error: error.message });
   }
 };
