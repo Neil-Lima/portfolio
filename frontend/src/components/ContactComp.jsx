@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Typography, Grid, TextField, Button, Box, Paper, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import SendIcon from '@mui/icons-material/Send';
@@ -73,6 +73,33 @@ const SocialIcons = styled(Box)(({ theme }) => ({
 
 const ContactComp = () => {
   const theme = useTheme();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/api/contact/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, subject: 'Contato do Portfolio', message }),
+      });
+      if (response.ok) {
+        alert('Mensagem enviada com sucesso!');
+        setName('');
+        setEmail('');
+        setMessage('');
+      } else {
+        alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+      }
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+    }
+  };
 
   return (
     <ContactSection id="contact">
@@ -87,11 +114,31 @@ const ContactComp = () => {
               }}>
                 Entre em Contato
               </Typography>
-              <form>
-                <StyledTextField fullWidth label="Nome" variant="outlined" />
-                <StyledTextField fullWidth label="Email" variant="outlined" />
-                <StyledTextField fullWidth label="Mensagem" variant="outlined" multiline rows={4} />
-                <SubmitButton variant="contained" endIcon={<SendIcon />}>
+              <form onSubmit={handleSubmit}>
+                <StyledTextField 
+                  fullWidth 
+                  label="Nome" 
+                  variant="outlined" 
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <StyledTextField 
+                  fullWidth 
+                  label="Email" 
+                  variant="outlined" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <StyledTextField 
+                  fullWidth 
+                  label="Mensagem" 
+                  variant="outlined" 
+                  multiline 
+                  rows={4} 
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+                <SubmitButton type="submit" variant="contained" endIcon={<SendIcon />}>
                   Enviar Mensagem
                 </SubmitButton>
               </form>

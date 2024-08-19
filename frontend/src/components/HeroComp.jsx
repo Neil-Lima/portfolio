@@ -105,7 +105,7 @@ const HeroComp = () => {
       <Container maxWidth="md">
         <ContentWrapper>
           <HeroTitle variant="h1">
-            Olá, eu sou João Silva
+            Olá, eu sou Victor Neil
           </HeroTitle>
           <HeroSubtitle variant="h5">
             Desenvolvedor Full Stack apaixonado por criar soluções inovadoras e experiências digitais incríveis
