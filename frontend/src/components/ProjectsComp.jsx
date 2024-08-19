@@ -11,6 +11,7 @@ import jogoVelhaImage from '../img/jogo_da_velha.png';
 import financasImage from '../img/financas.png';
 import cassinoImage from '../img/cassino.png';
 import calculadoraImage from '../img/calculadora.png';
+import nexusImage from '../img/nexus.png';
 
 const ProjectSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(12, 0),
@@ -95,8 +96,7 @@ const ModalContent = styled(Box)(({ theme }) => ({
   transform: 'translate(-50%, -50%)',
   width: '90%',
   maxWidth: 1000,
-  height: '80%',
-  maxHeight: 600,
+  maxHeight: '90vh',
   background: theme.palette.mode === 'dark'
     ? 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)'
     : 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
@@ -104,21 +104,32 @@ const ModalContent = styled(Box)(({ theme }) => ({
   borderRadius: 16,
   overflow: 'hidden',
   display: 'flex',
+  flexDirection: 'column',
+  [theme.breakpoints.up('md')]: {
+    flexDirection: 'row',
+  },
 }));
 
-const ModalImage = styled('img')({
-  width: '50%',
-  height: '100%',
+const ModalImage = styled('img')(({ theme }) => ({
+  width: '100%',
+  height: '200px',
   objectFit: 'cover',
-});
+  [theme.breakpoints.up('md')]: {
+    width: '50%',
+    height: 'auto',
+  },
+}));
 
 const ModalInfo = styled(Box)(({ theme }) => ({
-  width: '50%',
+  width: '100%',
   height: '100%',
   padding: theme.spacing(4),
   overflowY: 'auto',
   display: 'flex',
   flexDirection: 'column',
+  [theme.breakpoints.up('md')]: {
+    width: '50%',
+  },
 }));
 
 const TechIcon = styled('img')({
@@ -168,6 +179,14 @@ const projects = [
     demo: 'https://minicalculadoraapp.netlify.app/',
     technologies: ['React', 'TypeScript', 'Styled Components'],
   },
+  {
+    title: 'Nexus API',
+    description: 'Uma API social completa com funcionalidades avançadas e interface de usuário moderna.',
+    image: nexusImage,
+    github: 'https://github.com/yourusername/nexus-api',
+    demo: 'https://nexusapisocial.netlify.app/',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
+  },
 ];
 
 const techIcons = {
@@ -184,6 +203,7 @@ const techIcons = {
   'jQuery': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg',
   'TypeScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
   'Styled Components': 'https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png',
+  'Socket.io': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg',
 };
 
 const ProjectsComp = () => {
@@ -278,7 +298,7 @@ const ProjectsComp = () => {
                     <>
                       Este Jogo da Velha moderno oferece uma experiência de jogo clássica com um toque contemporâneo. Desenvolvido com HTML, CSS e JavaScript, o jogo apresenta uma interface responsiva e atraente, utilizando Bootstrap para um design limpo e adaptável. Características incluem:
                       <ul>
-                      <li>Modo claro/escuro para conforto visual</li>
+                        <li>Modo claro/escuro para conforto visual</li>
                         <li>Placar personalizado para acompanhar vitórias</li>
                         <li>Animações suaves para uma experiência interativa</li>
                         <li>Design responsivo para jogar em qualquer dispositivo</li>
@@ -312,6 +332,25 @@ const ProjectsComp = () => {
                       </ul>
                       Este projeto demonstra habilidades em desenvolvimento front-end com React, uso eficiente de TypeScript e criação de interfaces de usuário atraentes e funcionais.
                     </>
+                  ) : selectedProject.title === 'Nexus API' ? (
+                    <>
+                      A Nexus API é uma plataforma social completa que oferece uma ampla gama de funcionalidades para criar uma experiência de rede social rica e interativa. Desenvolvida com tecnologias modernas, a aplicação inclui:
+                      <ul>
+                        <li>Autenticação segura de usuários com JWT</li>
+                        <li>Perfis de usuário personalizáveis</li>
+                        <li>Sistema de postagens com suporte a mídia</li>
+                        <li>Funcionalidade de comentários e reações</li>
+                        <li>Sistema de amizades e conexões</li>
+                        <li>Mensagens em tempo real usando Socket.io</li>
+                        <li>Feed de notícias personalizado</li>
+                        <li>Notificações em tempo real</li>
+                        <li>Pesquisa avançada de usuários e conteúdo</li>
+                        <li>Interface responsiva e moderna com Material-UI</li>
+                        <li>Backend robusto com Node.js, Express e MongoDB</li>
+                      </ul>
+                      Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de sistemas distribuídos, comunicação em tempo real e design de APIs RESTful.
+                      <p><strong>Observação:</strong> O backend desta aplicação ainda está em desenvolvimento e em constante evolução para adicionar novas funcionalidades e melhorar o desempenho.</p>
+                    </>
                   ) : (
                     selectedProject.description
                   )}
@@ -339,3 +378,4 @@ const ProjectsComp = () => {
 };
 
 export default ProjectsComp;
+
