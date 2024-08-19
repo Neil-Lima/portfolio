@@ -13,6 +13,7 @@ import cassinoImage from '../img/cassino.png';
 import calculadoraImage from '../img/calculadora.png';
 import nexusImage from '../img/nexus.png';
 import tabuadaImage from '../img/tabuada.png';
+import urnaImage from '../img/urna.png';
 
 const ProjectSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(12, 0),
@@ -150,20 +151,20 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
 
 const projects = [
   {
+    title: 'Nexus API',
+    description: 'Uma API social completa com funcionalidades avançadas e interface de usuário moderna.',
+    image: nexusImage,
+    github: 'https://github.com/yourusername/nexus-api',
+    demo: 'https://nexusapisocial.netlify.app/',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
+  },
+  {
     title: 'Finanças Pessoais',
     description: 'Aplicativo completo de gerenciamento financeiro pessoal com recursos avançados de controle de despesas, orçamentos e investimentos.',
     image: financasImage,
     github: 'https://github.com/yourusername/financas-pessoais',
     demo: 'https://financasappproject.netlify.app/',
     technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Material-UI'],
-  },
-  {
-    title: 'Jogo da Velha',
-    description: 'Um jogo da velha interativo e responsivo com interface moderna, modos claro/escuro e placar personalizado.',
-    image: jogoVelhaImage,
-    github: 'https://github.com/yourusername/jogo-da-velha',
-    demo: 'https://jogodavelhaapp.netlify.app/',
-    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
   },
   {
     title: 'Casino Web',
@@ -174,20 +175,29 @@ const projects = [
     technologies: ['HTML', 'CSS', 'JavaScript', 'jQuery'],
   },
   {
+    title: 'Urna Eletrônica',
+    description: 'Uma simulação interativa de urna eletrônica desenvolvida com Next.js, oferecendo uma experiência realista de votação.',
+    image: urnaImage,
+    github: 'https://github.com/yourusername/urna-eletronica',
+    demo: 'https://urnaeletronicaapp.netlify.app/',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Bootstrap'],
+  },
+  {
+    title: 'Jogo da Velha',
+    description: 'Um jogo da velha interativo e responsivo com interface moderna, modos claro/escuro e placar personalizado.',
+    image: jogoVelhaImage,
+    github: 'https://github.com/yourusername/jogo-da-velha',
+    demo: 'https://jogodavelhaapp.netlify.app/',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+  },
+ 
+  {
     title: 'Calculadora',
     description: 'Uma calculadora interativa com design moderno e funcionalidades avançadas.',
     image: calculadoraImage,
     github: 'https://github.com/yourusername/calculadora',
     demo: 'https://minicalculadoraapp.netlify.app/',
     technologies: ['React', 'TypeScript', 'Styled Components'],
-  },
-  {
-    title: 'Nexus API',
-    description: 'Uma API social completa com funcionalidades avançadas e interface de usuário moderna.',
-    image: nexusImage,
-    github: 'https://github.com/yourusername/nexus-api',
-    demo: 'https://nexusapisocial.netlify.app/',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
   },
   {
     title: 'Tabuada Interativa',
@@ -197,6 +207,7 @@ const projects = [
     demo: 'https://tabuadaapp.netlify.app/',
     technologies: ['React', 'TypeScript', 'Redux', 'Styled Components'],
   },
+ 
 ];
 
 const techIcons = {
@@ -215,6 +226,7 @@ const techIcons = {
   'Styled Components': 'https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png',
   'Socket.io': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg',
   'Redux': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
+  'Next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
 };
 
 const ProjectsComp = () => {
@@ -277,130 +289,146 @@ const ProjectsComp = () => {
         onClose={handleCloseModal}
         aria-labelledby="project-modal-title"
         aria-describedby="project-modal-description"
-      >
-        <ModalContent>
-          <CloseButton onClick={handleCloseModal}>
-            <CloseIcon />
-          </CloseButton>
-          {selectedProject && (
-            <>
-              <ModalImage src={selectedProject.image} alt={selectedProject.title} />
-              <ModalInfo>
-                <Typography id="project-modal-title" variant="h4" component="h2" sx={{ mb: 2, color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>
-                  {selectedProject.title}
-                </Typography>
-                <Typography id="project-modal-description" sx={{ mb: 3, color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)' }}>
-                  {selectedProject.title === 'Finanças Pessoais' ? (
-                    <>
-                      Este aplicativo de Finanças Pessoais é uma solução completa para gerenciamento financeiro, oferecendo uma ampla gama de funcionalidades para ajudar os usuários a controlar suas finanças de forma eficiente. Desenvolvido com tecnologias modernas, o aplicativo inclui:
-                      <ul>
-                        <li>Autenticação segura com JWT</li>
-                        <li>Gerenciamento de despesas e receitas</li>
-                        <li>Criação e acompanhamento de orçamentos</li>
-                        <li>Controle de contas e saldos</li>
-                        <li>Acompanhamento de investimentos</li>
-                        <li>Geração de relatórios financeiros</li>
-                        <li>Interface responsiva e intuitiva com Material-UI</li>
-                        <li>Backend robusto com Node.js, Express e MongoDB</li>
-                      </ul>
-                      Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de software, segurança e design de interfaces de usuário.
-                    </>
-                  ) : selectedProject.title === 'Jogo da Velha' ? (
-                    <>
-                      Este Jogo da Velha moderno oferece uma experiência de jogo clássica com um toque contemporâneo. Desenvolvido com HTML, CSS e JavaScript, o jogo apresenta uma interface responsiva e atraente, utilizando Bootstrap para um design limpo e adaptável. Características incluem:
-                      <ul>
-                        <li>Modo claro/escuro para conforto visual</li>
-                        <li>Placar personalizado para acompanhar vitórias</li>
-                        <li>Animações suaves para uma experiência interativa</li>
-                        <li>Design responsivo para jogar em qualquer dispositivo</li>
-                      </ul>
-                      O projeto demonstra habilidades em desenvolvimento front-end e design de UI/UX, criando uma versão envolvente de um jogo atemporal.
-                    </>
-                  ) : selectedProject.title === 'Casino Web' ? (
-                    <>
-                      Esta plataforma de Casino Web oferece uma experiência de jogo envolvente e realista. Desenvolvida com tecnologias web modernas, a aplicação inclui:
-                      <ul>
-                        <li>Variedade de jogos de cassino, incluindo roleta, blackjack e caça-níqueis</li>
-                        <li>Sistema de apostas interativo</li>
-                        <li>Design responsivo para jogar em qualquer dispositivo</li>
-                        <li>Animações suaves e efeitos sonoros para uma experiência imersiva</li>
-                        <li>Sistema de login e gerenciamento de saldo do usuário</li>
-                        <li>Interface intuitiva e atraente</li>
-                      </ul>
-                      Este projeto demonstra habilidades em desenvolvimento front-end, design de UI/UX e implementação de lógica de jogos complexa usando JavaScript e jQuery.
-                    </>
-                  ) : selectedProject.title === 'Calculadora' ? (
-                    <>
-                      Esta Calculadora moderna e interativa oferece uma experiência de usuário aprimorada com design elegante e funcionalidades avançadas. Desenvolvida com React e TypeScript, a aplicação apresenta:
-                      <ul>
-                        <li>Interface limpa e intuitiva com design responsivo</li>
-                        <li>Operações matemáticas básicas e avançadas</li>
-                        <li>Histórico de cálculos para fácil referência</li>
-                        <li>Animações suaves para melhor feedback visual</li>
-                        <li>Modo de tema claro/escuro para conforto visual</li>
-                        <li>Código bem estruturado e tipado com TypeScript</li>
-                        <li>Estilização moderna usando Styled Components</li>
-                      </ul>
-                      Este projeto demonstra habilidades em desenvolvimento front-end com React, uso eficiente de TypeScript e criação de interfaces de usuário atraentes e funcionais.
-                    </>
-                  ) : selectedProject.title === 'Nexus API' ? (
-                    <>
-                      A Nexus API é uma plataforma social completa que oferece uma ampla gama de funcionalidades para criar uma experiência de rede social rica e interativa. Desenvolvida com tecnologias modernas, a aplicação inclui:
-                      <ul>
-                        <li>Autenticação segura de usuários com JWT</li>
-                        <li>Perfis de usuário personalizáveis</li>
-                        <li>Sistema de postagens com suporte a mídia</li>
-                        <li>Funcionalidade de comentários e reações</li>
-                        <li>Sistema de amizades e conexões</li>
-                        <li>Mensagens em tempo real usando Socket.io</li>
-                        <li>Feed de notícias personalizado</li>
-                        <li>Notificações em tempo real</li>
-                        <li>Pesquisa avançada de usuários e conteúdo</li>
-                        <li>Interface responsiva e moderna com Material-UI</li>
-                        <li>Backend robusto com Node.js, Express e MongoDB</li>
-                      </ul>
-                      Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de sistemas distribuídos, comunicação em tempo real e design de APIs RESTful.
-                      <p><strong>Observação:</strong> O backend desta aplicação ainda está em desenvolvimento e em constante evolução para adicionar novas funcionalidades e melhorar o desempenho.</p>
-                    </>
-                  ) : selectedProject.title === 'Tabuada Interativa' ? (
-                    <>
-                      A Tabuada Interativa é uma aplicação educacional projetada para tornar o aprendizado e a prática da tabuada divertidos e eficazes. Desenvolvida com React, TypeScript e Redux, a aplicação oferece:
-                      <ul>
-                        <li>Interface interativa e amigável para crianças e adultos</li>
-                        <li>Modos de prática e teste para diferentes níveis de habilidade</li>
-                        <li>Acompanhamento de progresso e estatísticas de desempenho</li>
-                        <li>Animações e efeitos sonoros para feedback imediato</li>
-                        <li>Design responsivo para uso em dispositivos móveis e desktops</li>
-                        <li>Gerenciamento de estado eficiente com Redux</li>
-                        <li>Código bem estruturado e tipado com TypeScript</li>
-                        <li>Estilização moderna e atraente com Styled Components</li>
-                      </ul>
-                      Este projeto demonstra habilidades em desenvolvimento front-end com React, gerenciamento de estado com Redux, e criação de aplicações educacionais interativas.
-                    </>
-                  ) : (
-                    selectedProject.description
-                  )}
-                </Typography>
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', mb: 3 }}>
-                  {selectedProject.technologies.map((tech, i) => (
-                    <TechIcon key={i} src={techIcons[tech]} alt={tech} title={tech} />
-                  ))}
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 'auto' }}>
-                  <Button variant="contained" color="primary" startIcon={<GitHubIcon />} href={selectedProject.github} target="_blank">
-                    GitHub
-                  </Button>
-                  <Button variant="outlined" color="secondary" endIcon={<LaunchIcon />} href={selectedProject.demo} target="_blank">
-                    Demo
-                  </Button>
-                </Box>
-              </ModalInfo>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </ProjectSection>
-  );
-};
-
-export default ProjectsComp;
+        >
+          <ModalContent>
+            <CloseButton onClick={handleCloseModal}>
+              <CloseIcon />
+            </CloseButton>
+            {selectedProject && (
+              <>
+                <ModalImage src={selectedProject.image} alt={selectedProject.title} />
+                <ModalInfo>
+                  <Typography id="project-modal-title" variant="h4" component="h2" sx={{ mb: 2, color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>
+                    {selectedProject.title}
+                  </Typography>
+                  <Typography id="project-modal-description" sx={{ mb: 3, color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)' }}>
+                    {selectedProject.title === 'Finanças Pessoais' ? (
+                      <>
+                        Este aplicativo de Finanças Pessoais é uma solução completa para gerenciamento financeiro, oferecendo uma ampla gama de funcionalidades para ajudar os usuários a controlar suas finanças de forma eficiente. Desenvolvido com tecnologias modernas, o aplicativo inclui:
+                        <ul>
+                          <li>Autenticação segura com JWT</li>
+                          <li>Gerenciamento de despesas e receitas</li>
+                          <li>Criação e acompanhamento de orçamentos</li>
+                          <li>Controle de contas e saldos</li>
+                          <li>Acompanhamento de investimentos</li>
+                          <li>Geração de relatórios financeiros</li>
+                          <li>Interface responsiva e intuitiva com Material-UI</li>
+                          <li>Backend robusto com Node.js, Express e MongoDB</li>
+                        </ul>
+                        Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de software, segurança e design de interfaces de usuário.
+                      </>
+                    ) : selectedProject.title === 'Jogo da Velha' ? (
+                      <>
+                        Este Jogo da Velha moderno oferece uma experiência de jogo clássica com um toque contemporâneo. Desenvolvido com HTML, CSS e JavaScript, o jogo apresenta uma interface responsiva e atraente, utilizando Bootstrap para um design limpo e adaptável. Características incluem:
+                        <ul>
+                          <li>Modo claro/escuro para conforto visual</li>
+                          <li>Placar personalizado para acompanhar vitórias</li>
+                          <li>Animações suaves para uma experiência interativa</li>
+                          <li>Design responsivo para jogar em qualquer dispositivo</li>
+                        </ul>
+                        O projeto demonstra habilidades em desenvolvimento front-end e design de UI/UX, criando uma versão envolvente de um jogo atemporal.
+                      </>
+                    ) : selectedProject.title === 'Casino Web' ? (
+                      <>
+                        Esta plataforma de Casino Web oferece uma experiência de jogo envolvente e realista. Desenvolvida com tecnologias web modernas, a aplicação inclui:
+                        <ul>
+                          <li>Variedade de jogos de cassino, incluindo roleta, blackjack e caça-níqueis</li>
+                          <li>Sistema de apostas interativo</li>
+                          <li>Design responsivo para jogar em qualquer dispositivo</li>
+                          <li>Animações suaves e efeitos sonoros para uma experiência imersiva</li>
+                          <li>Sistema de login e gerenciamento de saldo do usuário</li>
+                          <li>Interface intuitiva e atraente</li>
+                        </ul>
+                        Este projeto demonstra habilidades em desenvolvimento front-end, design de UI/UX e implementação de lógica de jogos complexa usando JavaScript e jQuery.
+                      </>
+                    ) : selectedProject.title === 'Calculadora' ? (
+                      <>
+                        Esta Calculadora moderna e interativa oferece uma experiência de usuário aprimorada com design elegante e funcionalidades avançadas. Desenvolvida com React e TypeScript, a aplicação apresenta:
+                        <ul>
+                          <li>Interface limpa e intuitiva com design responsivo</li>
+                          <li>Operações matemáticas básicas e avançadas</li>
+                          <li>Histórico de cálculos para fácil referência</li>
+                          <li>Animações suaves para melhor feedback visual</li>
+                          <li>Modo de tema claro/escuro para conforto visual</li>
+                          <li>Código bem estruturado e tipado com TypeScript</li>
+                          <li>Estilização moderna usando Styled Components</li>
+                        </ul>
+                        Este projeto demonstra habilidades em desenvolvimento front-end com React, uso eficiente de TypeScript e criação de interfaces de usuário atraentes e funcionais.
+                      </>
+                    ) : selectedProject.title === 'Nexus API' ? (
+                      <>
+                        A Nexus API é uma plataforma social completa que oferece uma ampla gama de funcionalidades para criar uma experiência de rede social rica e interativa. Desenvolvida com tecnologias modernas, a aplicação inclui:
+                        <ul>
+                          <li>Autenticação segura de usuários com JWT</li>
+                          <li>Perfis de usuário personalizáveis</li>
+                          <li>Sistema de postagens com suporte a mídia</li>
+                          <li>Funcionalidade de comentários e reações</li>
+                          <li>Sistema de amizades e conexões</li>
+                          <li>Mensagens em tempo real usando Socket.io</li>
+                          <li>Feed de notícias personalizado</li>
+                          <li>Notificações em tempo real</li>
+                          <li>Pesquisa avançada de usuários e conteúdo</li>
+                          <li>Interface responsiva e moderna com Material-UI</li>
+                          <li>Backend robusto com Node.js, Express e MongoDB</li>
+                        </ul>
+                        Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de sistemas distribuídos, comunicação em tempo real e design de APIs RESTful.
+                        <p><strong>Observação:</strong> O backend desta aplicação ainda está em desenvolvimento e em constante evolução para adicionar novas funcionalidades e melhorar o desempenho.</p>
+                      </>
+                    ) : selectedProject.title === 'Tabuada Interativa' ? (
+                      <>
+                        A Tabuada Interativa é uma aplicação educacional projetada para tornar o aprendizado e a prática da tabuada divertidos e eficazes. Desenvolvida com React, TypeScript e Redux, a aplicação oferece:
+                        <ul>
+                          <li>Interface interativa e amigável para crianças e adultos</li>
+                          <li>Modos de prática e teste para diferentes níveis de habilidade</li>
+                          <li>Acompanhamento de progresso e estatísticas de desempenho</li>
+                          <li>Animações e efeitos sonoros para feedback imediato</li>
+                          <li>Design responsivo para uso em dispositivos móveis e desktops</li>
+                          <li>Gerenciamento de estado eficiente com Redux</li>
+                          <li>Código bem estruturado e tipado com TypeScript</li>
+                          <li>Estilização moderna e atraente com Styled Components</li>
+                        </ul>
+                        Este projeto demonstra habilidades em desenvolvimento front-end com React, gerenciamento de estado com Redux, e criação de aplicações educacionais interativas.
+                      </>
+                    ) : selectedProject.title === 'Urna Eletrônica' ? (
+                      <>
+                        A Urna Eletrônica é uma aplicação web que simula o processo de votação eletrônica, desenvolvida com Next.js e TypeScript. Principais características incluem:
+                        <ul>
+                          <li>Interface realista de urna eletrônica</li>
+                          <li>Simulação completa do processo de votação</li>
+                          <li>Lista de candidatos com fotos e informações</li>
+                          <li>Validação de votos e confirmação</li>
+                          <li>Renderização do lado do servidor (SSR) para melhor performance</li>
+                          <li>Design responsivo utilizando Bootstrap</li>
+                          <li>Gerenciamento de estado eficiente</li>
+                          <li>Código bem estruturado e tipado com TypeScript</li>
+                        </ul>
+                        Este projeto demonstra habilidades em desenvolvimento front-end com Next.js, TypeScript, e criação de aplicações interativas e educativas.
+                      </>
+                    ) : (
+                      selectedProject.description
+                    )}
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', mb: 3 }}>
+                    {selectedProject.technologies.map((tech, i) => (
+                      <TechIcon key={i} src={techIcons[tech]} alt={tech} title={tech} />
+                    ))}
+                  </Box>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 'auto' }}>
+                    <Button variant="contained" color="primary" startIcon={<GitHubIcon />} href={selectedProject.github} target="_blank">
+                      GitHub
+                    </Button>
+                    <Button variant="outlined" color="secondary" endIcon={<LaunchIcon />} href={selectedProject.demo} target="_blank">
+                      Demo
+                    </Button>
+                  </Box>
+                </ModalInfo>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+      </ProjectSection>
+    );
+  };
+  
+  export default ProjectsComp;
+  
