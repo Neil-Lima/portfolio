@@ -6,6 +6,10 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
 
+// Importando as imagens
+import jogoVelhaImage from '../img/jogo_da_velha.png';
+
+
 const ProjectSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(12, 0),
   background: theme.palette.mode === 'dark'
@@ -123,27 +127,12 @@ const projects = [
   {
     title: 'Jogo da Velha',
     description: 'Um jogo da velha interativo e responsivo com interface moderna, modos claro/escuro e placar personalizado.',
-    image: 'img/jogo_da_velha.png',
+    image: jogoVelhaImage,
     github: 'https://github.com/yourusername/jogo-da-velha',
     demo: 'https://jogodavelhaapp.netlify.app/',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
   },
-  {
-    title: 'Nexus: E-commerce Revolution',
-    description: 'Um ecossistema de e-commerce inovador com IA integrada para recomendações personalizadas e gestão de inventário em tempo real.',
-    image: 'https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    github: 'https://github.com/yourusername/nexus-ecommerce',
-    demo: 'https://nexus-demo.com',
-    technologies: ['React', 'Node.js', 'MongoDB', 'TensorFlow'],
-  },
-  {
-    title: 'Quantum Task',
-    description: 'Plataforma de gerenciamento de tarefas com interface futurista, colaboração em tempo real e integração com IA para priorização inteligente.',
-    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
-    github: 'https://github.com/yourusername/quantum-task',
-    demo: 'https://quantum-task-demo.com',
-    technologies: ['Vue.js', 'GraphQL', 'Prisma', 'WebSocket'],
-  },
+ 
 ];
 
 const techIcons = {
