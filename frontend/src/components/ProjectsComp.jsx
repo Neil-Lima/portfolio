@@ -167,14 +167,6 @@ const projects = [
     technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Material-UI'],
   },
   {
-    title: 'Casino Web',
-    description: 'Plataforma de cassino online com jogos interativos, sistema de apostas e design atraente.',
-    image: cassinoImage,
-    github: 'https://github.com/yourusername/casino-web',
-    demo: 'https://cassinowebapp.netlify.app/',
-    technologies: ['HTML', 'CSS', 'JavaScript', 'jQuery'],
-  },
-  {
     title: 'Urna Eletrônica',
     description: 'Uma simulação interativa de urna eletrônica desenvolvida com Next.js, oferecendo uma experiência realista de votação.',
     image: urnaImage,
@@ -182,6 +174,15 @@ const projects = [
     demo: 'https://urnaeletronicaapp.netlify.app/',
     technologies: ['Next.js', 'React', 'TypeScript', 'Bootstrap'],
   },
+  {
+    title: 'Casino Web',
+    description: 'Plataforma de cassino online com jogos interativos, sistema de apostas e design atraente.',
+    image: cassinoImage,
+    github: 'https://github.com/yourusername/casino-web',
+    demo: 'https://cassinowebapp.netlify.app/',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'jQuery'],
+  },
+ 
   {
     title: 'Jogo da Velha',
     description: 'Um jogo da velha interativo e responsivo com interface moderna, modos claro/escuro e placar personalizado.',
