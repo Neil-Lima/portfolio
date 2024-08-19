@@ -6,9 +6,9 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from '@mui/material/styles';
 
-// Importando as imagens
+// Importing images
 import jogoVelhaImage from '../img/jogo_da_velha.png';
-
+import financasImage from '../img/financas.png';
 
 const ProjectSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(12, 0),
@@ -29,16 +29,21 @@ const ProjectCard = styled(Card)(({ theme }) => ({
     : 'linear-gradient(135deg, #f5f7fa, #c3cfe2)',
   border: theme.palette.mode === 'dark'
     ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(255, 255, 255, 0.2)',
+    : '1px solid rgba(0, 0, 0, 0.1)',
   transition: 'all 0.3s cubic-bezier(.25,.8,.25,1)',
   cursor: 'pointer',
+  boxShadow: theme.palette.mode === 'dark'
+    ? '0 15px 30px rgba(0,0,0,0.4), 0 5px 15px rgba(0,0,0,0.3)'
+    : '0 15px 30px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.07)',
   '&:hover': {
-    transform: 'translateY(-10px)',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+    transform: 'translateY(-10px) scale(1.02)',
+    boxShadow: theme.palette.mode === 'dark'
+      ? '0 20px 40px rgba(0,0,0,0.5), 0 10px 20px rgba(0,0,0,0.4)'
+      : '0 20px 40px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.1)',
   },
 }));
 
-const ProjectMedia = styled(CardMedia)({
+const ProjectMedia = styled(CardMedia)(({ theme }) => ({
   height: 250,
   position: 'relative',
   overflow: 'hidden',
@@ -49,30 +54,35 @@ const ProjectMedia = styled(CardMedia)({
     left: 0,
     right: 0,
     bottom: 0,
-    background: 'linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.7))',
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.8))'
+      : 'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.8))',
   },
-});
+}));
 
-const ProjectTitle = styled(Typography)({
+const ProjectTitle = styled(Typography)(({ theme }) => ({
   position: 'absolute',
   bottom: 20,
   left: 20,
-  color: 'white',
+  color: theme.palette.mode === 'dark' ? 'white' : 'black',
   zIndex: 1,
   fontWeight: 'bold',
-  textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
-});
+  textShadow: theme.palette.mode === 'dark'
+    ? '2px 2px 4px rgba(0,0,0,0.5)'
+    : '2px 2px 4px rgba(255,255,255,0.5)',
+}));
 
 const TechChip = styled(Chip)(({ theme }) => ({
   margin: theme.spacing(0.5),
   backgroundColor: theme.palette.mode === 'dark'
     ? 'rgba(255, 255, 255, 0.1)'
-    : 'rgba(255, 255, 255, 0.2)',
+    : 'rgba(0, 0, 0, 0.1)',
   color: theme.palette.mode === 'dark'
     ? theme.palette.primary.light
-    : 'white',
+    : theme.palette.primary.dark,
   '&:hover': {
     backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
   },
 }));
 
@@ -125,6 +135,14 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
 
 const projects = [
   {
+    title: 'Finanças Pessoais',
+    description: 'Aplicativo completo de gerenciamento financeiro pessoal com recursos avançados de controle de despesas, orçamentos e investimentos.',
+    image: financasImage,
+    github: 'https://github.com/yourusername/financas-pessoais',
+    demo: 'https://financasappproject.netlify.app/',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Material-UI'],
+  },
+  {
     title: 'Jogo da Velha',
     description: 'Um jogo da velha interativo e responsivo com interface moderna, modos claro/escuro e placar personalizado.',
     image: jogoVelhaImage,
@@ -132,7 +150,6 @@ const projects = [
     demo: 'https://jogodavelhaapp.netlify.app/',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
   },
- 
 ];
 
 const techIcons = {
@@ -143,11 +160,9 @@ const techIcons = {
   'React': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
   'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
   'MongoDB': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
-  'TensorFlow': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
-  'Vue.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
-  'GraphQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg',
-  'Prisma': 'https://www.vectorlogo.zone/logos/prisma/prisma-icon.svg',
-  'WebSocket': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+  'Express': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+  'JWT': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+  'Material-UI': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg',
 };
 
 const ProjectsComp = () => {
@@ -177,7 +192,7 @@ const ProjectsComp = () => {
         </Typography>
         <Grid container spacing={6}>
           {projects.map((project, index) => (
-            <Grid item key={index} xs={12} md={6} lg={4}>
+            <Grid item key={index} xs={12} md={6}>
               <ProjectCard elevation={0} onClick={() => handleOpenModal(project)}>
                 <ProjectMedia image={project.image} title={project.title}>
                   <ProjectTitle variant="h5">{project.title}</ProjectTitle>
@@ -223,7 +238,22 @@ const ProjectsComp = () => {
                   {selectedProject.title}
                 </Typography>
                 <Typography id="project-modal-description" sx={{ mb: 3, color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)' }}>
-                  {selectedProject.title === 'Jogo da Velha' ? (
+                  {selectedProject.title === 'Finanças Pessoais' ? (
+                    <>
+                      Este aplicativo de Finanças Pessoais é uma solução completa para gerenciamento financeiro, oferecendo uma ampla gama de funcionalidades para ajudar os usuários a controlar suas finanças de forma eficiente. Desenvolvido com tecnologias modernas, o aplicativo inclui:
+                      <ul>
+                        <li>Autenticação segura com JWT</li>
+                        <li>Gerenciamento de despesas e receitas</li>
+                        <li>Criação e acompanhamento de orçamentos</li>
+                        <li>Controle de contas e saldos</li>
+                        <li>Acompanhamento de investimentos</li>
+                        <li>Geração de relatórios financeiros</li>
+                        <li>Interface responsiva e intuitiva com Material-UI</li>
+                        <li>Backend robusto com Node.js, Express e MongoDB</li>
+                      </ul>
+                      Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de software, segurança e design de interfaces de usuário.
+                    </>
+                  ) : selectedProject.title === 'Jogo da Velha' ? (
                     <>
                       Este Jogo da Velha moderno oferece uma experiência de jogo clássica com um toque contemporâneo. Desenvolvido com HTML, CSS e JavaScript, o jogo apresenta uma interface responsiva e atraente, utilizando Bootstrap para um design limpo e adaptável. Características incluem:
                       <ul>
@@ -261,3 +291,4 @@ const ProjectsComp = () => {
 };
 
 export default ProjectsComp;
+
