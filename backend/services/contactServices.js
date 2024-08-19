@@ -1,7 +1,9 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: "smtp-mail.outlook.com",
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
@@ -11,7 +13,7 @@ const transporter = nodemailer.createTransport({
 exports.sendEmail = async (name, email, subject, message) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
+    to: 'neil.033@hotmail.com',
     subject: `New Contact Form Submission: ${subject}`,
     text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
   };
