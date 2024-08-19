@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { Container, Typography, Grid, TextField, Button, Box, Paper, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import SendIcon from '@mui/icons-material/Send';
@@ -76,33 +77,29 @@ const ContactComp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:5000/api/contact/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, subject: 'Contato do Portfolio', message }),
+      const response = await axios.post('http://localhost:5000/api/contact/submit', {
+        name,
+        email,
+        subject: 'Contato do Portfolio',
+        message
       });
       
-      console.log('Resposta do servidor:', await response.json());
-
-      if (response.ok) {
-        alert('Mensagem enviada com sucesso!');
-        setName('');
-        setEmail('');
-        setMessage('');
-      } else {
-        const errorData = await response.json();
-        console.error('Erro do servidor:', errorData);
-        alert(`Erro ao enviar mensagem: ${errorData.message || 'Tente novamente.'}`);
-      }
+      console.log('Resposta do servidor:', response.data);
+      alert('Mensagem enviada com sucesso!');
+      setName('');
+      setEmail('');
+      setMessage('');
     } catch (error) {
-      console.error('Erro detalhado:', error);
-      alert('Erro ao enviar mensagem. Por favor, verifique o console e tente novamente.');
+      console.error('Erro ao enviar mensagem:', error.response?.data || error.message);
+      alert('Erro ao enviar mensagem. Por favor, tente novamente.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -126,13 +123,16 @@ const ContactComp = () => {
                   variant="outlined" 
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
                 />
                 <StyledTextField 
                   fullWidth 
                   label="Email" 
                   variant="outlined" 
+                  type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
                 <StyledTextField 
                   fullWidth 
@@ -142,9 +142,15 @@ const ContactComp = () => {
                   rows={4} 
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
+                  required
                 />
-                <SubmitButton type="submit" variant="contained" endIcon={<SendIcon />}>
-                  Enviar Mensagem
+                <SubmitButton 
+                  type="submit" 
+                  variant="contained" 
+                  endIcon={<SendIcon />}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
                 </SubmitButton>
               </form>
             </ContactPaper>
