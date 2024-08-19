@@ -167,7 +167,7 @@ const ContactComp = () => {
               <ContactInfo>
                 <EmailIcon sx={{ marginRight: 2 }} />
                 <Typography color={theme.palette.mode === 'dark' ? '#E0E0E0' : 'inherit'}>
-                  victorneil08@gmail.com
+                  victorneil08@gmail.com, neil.033@hotmail.com
                 </Typography>
               </ContactInfo>
               <ContactInfo>
