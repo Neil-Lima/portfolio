@@ -9,6 +9,8 @@ import { useTheme } from '@mui/material/styles';
 // Importing images
 import jogoVelhaImage from '../img/jogo_da_velha.png';
 import financasImage from '../img/financas.png';
+import cassinoImage from '../img/cassino.png';
+import calculadoraImage from '../img/calculadora.png';
 
 const ProjectSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(12, 0),
@@ -150,6 +152,22 @@ const projects = [
     demo: 'https://jogodavelhaapp.netlify.app/',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
   },
+  {
+    title: 'Casino Web',
+    description: 'Plataforma de cassino online com jogos interativos, sistema de apostas e design atraente.',
+    image: cassinoImage,
+    github: 'https://github.com/yourusername/casino-web',
+    demo: 'https://cassinowebapp.netlify.app/',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'jQuery'],
+  },
+  {
+    title: 'Calculadora',
+    description: 'Uma calculadora interativa com design moderno e funcionalidades avançadas.',
+    image: calculadoraImage,
+    github: 'https://github.com/yourusername/calculadora',
+    demo: 'https://minicalculadoraapp.netlify.app/',
+    technologies: ['React', 'TypeScript', 'Styled Components'],
+  },
 ];
 
 const techIcons = {
@@ -163,6 +181,9 @@ const techIcons = {
   'Express': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
   'JWT': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
   'Material-UI': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg',
+  'jQuery': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg',
+  'TypeScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+  'Styled Components': 'https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png',
 };
 
 const ProjectsComp = () => {
@@ -190,9 +211,9 @@ const ProjectsComp = () => {
         }}>
           Projetos Inovadores
         </Typography>
-        <Grid container spacing={6}>
+        <Grid container spacing={4}>
           {projects.map((project, index) => (
-            <Grid item key={index} xs={12} md={6}>
+            <Grid item key={index} xs={12} sm={6} md={4}>
               <ProjectCard elevation={0} onClick={() => handleOpenModal(project)}>
                 <ProjectMedia image={project.image} title={project.title}>
                   <ProjectTitle variant="h5">{project.title}</ProjectTitle>
@@ -257,12 +278,39 @@ const ProjectsComp = () => {
                     <>
                       Este Jogo da Velha moderno oferece uma experiência de jogo clássica com um toque contemporâneo. Desenvolvido com HTML, CSS e JavaScript, o jogo apresenta uma interface responsiva e atraente, utilizando Bootstrap para um design limpo e adaptável. Características incluem:
                       <ul>
-                        <li>Modo claro/escuro para conforto visual</li>
+                      <li>Modo claro/escuro para conforto visual</li>
                         <li>Placar personalizado para acompanhar vitórias</li>
                         <li>Animações suaves para uma experiência interativa</li>
                         <li>Design responsivo para jogar em qualquer dispositivo</li>
                       </ul>
                       O projeto demonstra habilidades em desenvolvimento front-end e design de UI/UX, criando uma versão envolvente de um jogo atemporal.
+                    </>
+                  ) : selectedProject.title === 'Casino Web' ? (
+                    <>
+                      Esta plataforma de Casino Web oferece uma experiência de jogo envolvente e realista. Desenvolvida com tecnologias web modernas, a aplicação inclui:
+                      <ul>
+                        <li>Variedade de jogos de cassino, incluindo roleta, blackjack e caça-níqueis</li>
+                        <li>Sistema de apostas interativo</li>
+                        <li>Design responsivo para jogar em qualquer dispositivo</li>
+                        <li>Animações suaves e efeitos sonoros para uma experiência imersiva</li>
+                        <li>Sistema de login e gerenciamento de saldo do usuário</li>
+                        <li>Interface intuitiva e atraente</li>
+                      </ul>
+                      Este projeto demonstra habilidades em desenvolvimento front-end, design de UI/UX e implementação de lógica de jogos complexa usando JavaScript e jQuery.
+                    </>
+                  ) : selectedProject.title === 'Calculadora' ? (
+                    <>
+                      Esta Calculadora moderna e interativa oferece uma experiência de usuário aprimorada com design elegante e funcionalidades avançadas. Desenvolvida com React e TypeScript, a aplicação apresenta:
+                      <ul>
+                        <li>Interface limpa e intuitiva com design responsivo</li>
+                        <li>Operações matemáticas básicas e avançadas</li>
+                        <li>Histórico de cálculos para fácil referência</li>
+                        <li>Animações suaves para melhor feedback visual</li>
+                        <li>Modo de tema claro/escuro para conforto visual</li>
+                        <li>Código bem estruturado e tipado com TypeScript</li>
+                        <li>Estilização moderna usando Styled Components</li>
+                      </ul>
+                      Este projeto demonstra habilidades em desenvolvimento front-end com React, uso eficiente de TypeScript e criação de interfaces de usuário atraentes e funcionais.
                     </>
                   ) : (
                     selectedProject.description
@@ -291,4 +339,3 @@ const ProjectsComp = () => {
 };
 
 export default ProjectsComp;
-
