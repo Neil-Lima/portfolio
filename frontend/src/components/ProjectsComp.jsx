@@ -12,6 +12,7 @@ import financasImage from '../img/financas.png';
 import cassinoImage from '../img/cassino.png';
 import calculadoraImage from '../img/calculadora.png';
 import nexusImage from '../img/nexus.png';
+import tabuadaImage from '../img/tabuada.png';
 
 const ProjectSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(12, 0),
@@ -94,8 +95,8 @@ const ModalContent = styled(Box)(({ theme }) => ({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '90%',
-  maxWidth: 1000,
+  width: '95%',
+  maxWidth: 1200,
   maxHeight: '90vh',
   background: theme.palette.mode === 'dark'
     ? 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)'
@@ -112,7 +113,7 @@ const ModalContent = styled(Box)(({ theme }) => ({
 
 const ModalImage = styled('img')(({ theme }) => ({
   width: '100%',
-  height: '200px',
+  height: '300px',
   objectFit: 'cover',
   [theme.breakpoints.up('md')]: {
     width: '50%',
@@ -129,6 +130,7 @@ const ModalInfo = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
   [theme.breakpoints.up('md')]: {
     width: '50%',
+    maxHeight: '90vh',
   },
 }));
 
@@ -187,6 +189,14 @@ const projects = [
     demo: 'https://nexusapisocial.netlify.app/',
     technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
   },
+  {
+    title: 'Tabuada Interativa',
+    description: 'Uma aplicação interativa para praticar e aprender tabuadas de forma divertida e eficiente.',
+    image: tabuadaImage,
+    github: 'https://github.com/yourusername/tabuada-interativa',
+    demo: 'https://tabuadaapp.netlify.app/',
+    technologies: ['React', 'TypeScript', 'Redux', 'Styled Components'],
+  },
 ];
 
 const techIcons = {
@@ -204,6 +214,7 @@ const techIcons = {
   'TypeScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
   'Styled Components': 'https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png',
   'Socket.io': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg',
+  'Redux': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
 };
 
 const ProjectsComp = () => {
@@ -351,6 +362,21 @@ const ProjectsComp = () => {
                       Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de sistemas distribuídos, comunicação em tempo real e design de APIs RESTful.
                       <p><strong>Observação:</strong> O backend desta aplicação ainda está em desenvolvimento e em constante evolução para adicionar novas funcionalidades e melhorar o desempenho.</p>
                     </>
+                  ) : selectedProject.title === 'Tabuada Interativa' ? (
+                    <>
+                      A Tabuada Interativa é uma aplicação educacional projetada para tornar o aprendizado e a prática da tabuada divertidos e eficazes. Desenvolvida com React, TypeScript e Redux, a aplicação oferece:
+                      <ul>
+                        <li>Interface interativa e amigável para crianças e adultos</li>
+                        <li>Modos de prática e teste para diferentes níveis de habilidade</li>
+                        <li>Acompanhamento de progresso e estatísticas de desempenho</li>
+                        <li>Animações e efeitos sonoros para feedback imediato</li>
+                        <li>Design responsivo para uso em dispositivos móveis e desktops</li>
+                        <li>Gerenciamento de estado eficiente com Redux</li>
+                        <li>Código bem estruturado e tipado com TypeScript</li>
+                        <li>Estilização moderna e atraente com Styled Components</li>
+                      </ul>
+                      Este projeto demonstra habilidades em desenvolvimento front-end com React, gerenciamento de estado com Redux, e criação de aplicações educacionais interativas.
+                    </>
                   ) : (
                     selectedProject.description
                   )}
@@ -378,4 +404,3 @@ const ProjectsComp = () => {
 };
 
 export default ProjectsComp;
-
