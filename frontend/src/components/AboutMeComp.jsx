@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Container, Grid, Box, Avatar } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
-
+import victor from '../img/victor.jpg';
 const AboutSection = styled(Box)(({ theme }) => ({
   padding: theme.spacing(10, 0),
   background: theme.palette.mode === 'dark'
@@ -42,7 +42,7 @@ const AboutMeComp = () => {
         <Grid container spacing={6} alignItems="center">
           <Grid item xs={12} md={4}>
             <Box display="flex" justifyContent="center">
-              <StyledAvatar alt="Victor Lima" src="/path-to-your-image.jpg" />
+              <StyledAvatar alt="Victor Lima" src={victor} />
             </Box>
           </Grid>
           <Grid item xs={12} md={8}>

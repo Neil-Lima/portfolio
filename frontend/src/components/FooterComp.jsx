@@ -63,25 +63,22 @@ const FooterComp = () => {
     <FooterWrapper>
       <ContentWrapper maxWidth="lg">
         <Typography variant="h6" fontWeight="bold" sx={{ mb: 2, color: theme.palette.mode === 'dark' ? '#BB86FC' : '#6A5ACD' }}>
-          João Silva
+          Victor Neil
         </Typography>
         <Typography variant="body2" color={theme.palette.mode === 'dark' ? '#A0A0A0' : 'textSecondary'} align="center" sx={{ maxWidth: '600px', mb: 3 }}>
           Desenvolvedor Full Stack apaixonado por criar soluções inovadoras e experiências digitais incríveis.
         </Typography>
         <SocialIcons>
-          <SocialIcon href="#" aria-label="GitHub">
+          <SocialIcon href="https://github.com/Neil-Lima" aria-label="GitHub">
             <FaGithub size={24} />
           </SocialIcon>
-          <SocialIcon href="#" aria-label="LinkedIn">
+          <SocialIcon href="https://www.linkedin.com/in/neil-lima-706606248 " aria-label="LinkedIn">
             <FaLinkedin size={24} />
-          </SocialIcon>
-          <SocialIcon href="#" aria-label="Email">
-            <FaEnvelope size={24} />
-          </SocialIcon>
+          </SocialIcon>        
         </SocialIcons>
         <FooterDivider />
         <Typography variant="body2" color={theme.palette.mode === 'dark' ? '#808080' : 'textSecondary'}>
-          &copy; 2023 João Silva. Todos os direitos reservados.
+          &copy; 2024 Victor Neil. Todos os direitos reservados.
         </Typography>
       </ContentWrapper>
     </FooterWrapper>

@@ -53,7 +53,7 @@ const HomePage = () => {
       <HeroComp />
       <AboutMeComp />
       <SkillsComp />
-      <ProjectsComp />
+      <ProjectsComp /><br />
       <EducationComp />
       <CertificationsComp />
       <ContactComp />

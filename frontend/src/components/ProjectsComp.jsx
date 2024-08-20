@@ -253,7 +253,7 @@ const ProjectsComp = () => {
           marginBottom: 8,
           textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
         }}>
-          Projetos Inovadores
+          Projetos
         </Typography>
         <Grid container spacing={4}>
           {projects.map((project, index) => (

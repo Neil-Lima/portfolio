@@ -74,11 +74,11 @@ const ContactComp = () => {
               </ContactInfo>
               <SocialIcons>
                 <IconButton color={theme.palette.mode === 'dark' ? 'secondary' : 'primary'} 
-                            href="https://linkedin.com/in/yourprofile" target="_blank">
+                            href="https://www.linkedin.com/in/neil-lima-706606248" target="_blank">
                   <LinkedInIcon />
                 </IconButton>
                 <IconButton color={theme.palette.mode === 'dark' ? 'secondary' : 'primary'} 
-                            href="https://github.com/yourusername" target="_blank">
+                            href="https://github.com/Neil-Lima" target="_blank">
                   <GitHubIcon />
                 </IconButton>
               </SocialIcons>

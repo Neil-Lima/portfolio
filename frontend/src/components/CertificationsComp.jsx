@@ -39,24 +39,24 @@ const CertificateIcon = styled(VerifiedIcon)(({ theme }) => ({
 
 const certifications = [
   {
-    title: 'Responsive Web Design',
-    issuer: 'freeCodeCamp',
-    date: 'Issued: July 2022',
+    title: '• Programação de algoritmos escaláveis',
+    issuer: 'Estácio',
+    date: '26/04/2024',
   },
   {
-    title: 'JavaScript Algorithms and Data Structures',
-    issuer: 'freeCodeCamp',
-    date: 'Issued: August 2022',
+    title: 'Programação de sistemas de informação',
+    issuer: 'Estácio',
+    date: '26/04/2024',
   },
   {
-    title: 'Front End Development Libraries',
-    issuer: 'freeCodeCamp',
-    date: 'Issued: September 2022',
+    title: 'Programação para dispositivos móveis',
+    issuer: 'Estácio',
+    date: '26/04/2024',
   },
   {
-    title: 'Back End Development and APIs',
-    issuer: 'freeCodeCamp',
-    date: 'Issued: October 2022',
+    title: 'Programação para internet',
+    issuer: 'Estácio',
+    date: '26/04/2024',
   },
 ];
 
@@ -106,7 +106,6 @@ const CertificationsComp = () => {
                   fontStyle: 'italic', 
                   color: theme.palette.mode === 'dark' ? '#95a5a6' : 'text.secondary' 
                 }}>
-                  Clique para ver detalhes
                 </Typography>
               </Box>
             </CertificateCard>
