@@ -3,6 +3,7 @@ import { Typography, Container, Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
+import curriculoPDF from '../assets/VICTOR NEIL BARATA LIMA.pdf';
 
 const HeroSection = styled(Box)(({ theme }) => ({
   background:
@@ -119,8 +120,10 @@ const HeroComp = () => {
           <CTAButton
             variant="contained"
             color="secondary"
-            href="#contact"
             size="large"
+            component="a"
+            href={curriculoPDF}
+            download="VICTOR_NEIL_BARATA_LIMA_CV.pdf"
           >
             Download CV
           </CTAButton>
