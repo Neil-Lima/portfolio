@@ -50,6 +50,7 @@ const skills = [
   { name: 'Material-UI', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg' },
   { name: 'React Bootstrap', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg' },
   { name: 'Redux', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg' },
+  { name: 'Spring Boot', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg' },
   { name: 'GraphQL', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg' },
   { name: 'Angular', image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angular/angular-plain.svg' },
   { name: 'Apollo', image: 'https://cdn.worldvectorlogo.com/logos/apollo-graphql-compact.svg' },
