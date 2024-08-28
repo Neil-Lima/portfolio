@@ -10,6 +10,7 @@ import ContactComp from '../components/ContactComp';
 import FooterComp from '../components/FooterComp';
 import AboutMeComp from '../components/AboutMeComp';
 import { useTheme } from '@mui/material/styles';
+import WhatsAppButtonComp from '../components/WhatsAppButtonComp';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -58,6 +59,7 @@ const HomePage = () => {
       <CertificationsComp />
       <ContactComp />
       <FooterComp />
+      <WhatsAppButtonComp/> 
     </>
   );
 };
