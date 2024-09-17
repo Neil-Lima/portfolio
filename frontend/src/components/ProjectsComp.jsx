@@ -156,7 +156,7 @@ const projects = [
     image: nexusImage,
     github: 'https://github.com/Neil-Lima/nexusapi',
     demo: 'https://nexusapisocial.netlify.app/',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
+    technologies: ['React', 'Spring-Boot', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
   },
   {
     title: 'Finanças Pessoais',
