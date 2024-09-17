@@ -154,7 +154,7 @@ const projects = [
     title: 'Nexus API',
     description: 'Uma API social completa com funcionalidades avançadas e interface de usuário moderna.',
     image: nexusImage,
-    github: 'https://github.com/yourusername/nexus-api',
+    github: 'https://github.com/Neil-Lima/financas_app',
     demo: 'https://nexusapisocial.netlify.app/',
     technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
   },
