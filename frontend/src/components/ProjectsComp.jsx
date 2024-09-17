@@ -196,7 +196,7 @@ const projects = [
     title: 'Calculadora',
     description: 'Uma calculadora interativa com design moderno e funcionalidades avançadas.',
     image: calculadoraImage,
-    github: 'https://github.com/yourusername/calculadora',
+    github: 'https://github.com/Neil-Lima/calculadora',
     demo: 'https://minicalculadoraapp.netlify.app/',
     technologies: ['React', 'TypeScript', 'Styled Components'],
   },
