@@ -187,7 +187,7 @@ const projects = [
     title: 'Jogo da Velha',
     description: 'Um jogo da velha interativo e responsivo com interface moderna, modos claro/escuro e placar personalizado.',
     image: jogoVelhaImage,
-    github: 'https://github.com/yourusername/jogo-da-velha',
+    github: 'https://github.com/Neil-Lima/Jogo_da_velha',
     demo: 'https://jogodavelhaapp.netlify.app/',
     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap'],
   },
