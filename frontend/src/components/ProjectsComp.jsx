@@ -204,7 +204,7 @@ const projects = [
     title: 'Tabuada Interativa',
     description: 'Uma aplicação interativa para praticar e aprender tabuadas de forma divertida e eficiente.',
     image: tabuadaImage,
-    github: 'https://github.com/yourusername/tabuada-interativa',
+    github: 'https://github.com/Neil-Lima/tabuada',
     demo: 'https://tabuadaapp.netlify.app/',
     technologies: ['React', 'TypeScript', 'Redux', 'Styled Components'],
   },
