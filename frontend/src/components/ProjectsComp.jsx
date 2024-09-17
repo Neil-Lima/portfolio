@@ -178,7 +178,7 @@ const projects = [
     title: 'Casino Web',
     description: 'Plataforma de cassino online com jogos interativos, sistema de apostas e design atraente.',
     image: cassinoImage,
-    github: 'https://github.com/yourusername/casino-web',
+    github: 'https://github.com/Neil-Lima/cassino',
     demo: 'https://cassinowebapp.netlify.app/',
     technologies: ['HTML', 'CSS', 'JavaScript', 'jQuery'],
   },
