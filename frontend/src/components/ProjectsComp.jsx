@@ -370,7 +370,7 @@ const ProjectsComp = () => {
                           <li>Notificações em tempo real</li>
                           <li>Pesquisa avançada de usuários e conteúdo</li>
                           <li>Interface responsiva e moderna com Material-UI</li>
-                          <li>Backend robusto com Node.js, Express e MongoDB</li>
+                          <li>Backend robusto com Spring-boot e MongoDB</li>
                         </ul>
                         Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de sistemas distribuídos, comunicação em tempo real e design de APIs RESTful.
                         <p><strong>Observação:</strong> O backend desta aplicação ainda está em desenvolvimento e em constante evolução para adicionar novas funcionalidades e melhorar o desempenho.</p>
