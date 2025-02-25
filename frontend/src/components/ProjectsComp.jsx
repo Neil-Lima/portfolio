@@ -156,7 +156,7 @@ const projects = [
     image: nexusImage,
     github: 'https://github.com/Neil-Lima/nexusapi',
     demo: 'https://nexusapisocial.netlify.app/',
-    technologies: ['React', 'Spring-Boot', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
+    technologies: ['Next.js', 'React', 'Nest.js', 'MongoDB', 'TypeScript', 'Tailwind CSS', 'Prisma', 'Socket.io'],
   },
   {
     title: 'Finanças Pessoais',
@@ -225,6 +225,9 @@ const techIcons = {
   'Socket.io': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg',
   'Redux': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
   'Next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
+  'Nest.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg',
+  'Tailwind CSS': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
+  'Prisma': 'https://www.prisma.io/images/favicon-32x32.png',
 };
 
 const ProjectsComp = () => {
@@ -284,7 +287,7 @@ const ProjectsComp = () => {
                   )}
                 </ProjectMedia>
                 <CardContent>
-                  <Typography variant="body2" color={theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'textSecondary'} sx={{ mb: 2 }}>
+                <Typography variant="body2" color={theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'textSecondary'} sx={{ mb: 2 }}>
                     {project.description}
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', mb: 2 }}>
@@ -320,13 +323,58 @@ const ProjectsComp = () => {
           </CloseButton>
           {selectedProject && (
             <>
-              <ModalImage src={selectedProject.image} alt={selectedProject.title} />
+              <Box sx={{ position: 'relative', width: '100%', [theme.breakpoints.up('md')]: { width: '50%' } }}>
+                <ModalImage 
+                  src={selectedProject.image} 
+                  alt={selectedProject.title} 
+                  style={{
+                    filter: selectedProject.title === 'Nexus API' ? 'brightness(0.5)' : 'none'
+                  }}
+                />
+                {selectedProject.title === 'Nexus API' && (
+                  <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    zIndex: 2
+                  }}>
+                    <CircularProgress sx={{ color: 'white' }} />
+                    <Typography sx={{ 
+                      color: 'white', 
+                      mt: 2,
+                      fontWeight: 'bold',
+                      textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+                    }}>
+                      Em desenvolvimento
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
               <ModalInfo>
                 <Typography id="project-modal-title" variant="h4" component="h2" sx={{ mb: 2, color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>
                   {selectedProject.title}
                 </Typography>
                 <Typography id="project-modal-description" sx={{ mb: 3, color: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)' }}>
-                  {selectedProject.title === 'Finanças Pessoais' ? (
+                  {selectedProject.title === 'Nexus API' ? (
+                    <>
+                      A Nexus API é uma plataforma social completa que oferece uma ampla gama de funcionalidades para criar uma experiência de rede social rica e interativa. Desenvolvida com tecnologias modernas, a aplicação inclui:
+                      <ul>
+                        <li>Frontend moderno com Next.js 14 e React</li>
+                        <li>Backend robusto com Nest.js</li>
+                        <li>Banco de dados MongoDB com Prisma ORM</li>
+                        <li>Autenticação segura e autorização</li>
+                        <li>Sistema de postagens e comentários</li>
+                        <li>Chat em tempo real com Socket.io</li>
+                        <li>UI responsiva com Tailwind CSS</li>
+                        <li>TypeScript para maior segurança</li>
+                      </ul>
+                      <p><strong>Observação:</strong> Este projeto está atualmente em desenvolvimento, com novas funcionalidades sendo implementadas.</p>
+                    </>
+                  ) : selectedProject.title === 'Finanças Pessoais' ? (
                     <>
                       Este aplicativo de Finanças Pessoais é uma solução completa para gerenciamento financeiro, oferecendo uma ampla gama de funcionalidades para ajudar os usuários a controlar suas finanças de forma eficiente. Desenvolvido com tecnologias modernas, o aplicativo inclui:
                       <ul>
@@ -378,25 +426,6 @@ const ProjectsComp = () => {
                         <li>Estilização moderna usando Styled Components</li>
                       </ul>
                       Este projeto demonstra habilidades em desenvolvimento front-end com React, uso eficiente de TypeScript e criação de interfaces de usuário atraentes e funcionais.
-                    </>
-                  ) : selectedProject.title === 'Nexus API' ? (
-                    <>
-                      A Nexus API é uma plataforma social completa que oferece uma ampla gama de funcionalidades para criar uma experiência de rede social rica e interativa. Desenvolvida com tecnologias modernas, a aplicação inclui:
-                      <ul>
-                        <li>Autenticação segura de usuários com JWT</li>
-                        <li>Perfis de usuário personalizáveis</li>
-                        <li>Sistema de postagens com suporte a mídia</li>
-                        <li>Funcionalidade de comentários e reações</li>
-                        <li>Sistema de amizades e conexões</li>
-                        <li>Mensagens em tempo real usando Socket.io</li>
-                        <li>Feed de notícias personalizado</li>
-                        <li>Notificações em tempo real</li>
-                        <li>Pesquisa avançada de usuários e conteúdo</li>
-                        <li>Interface responsiva e moderna com Material-UI</li>
-                        <li>Backend robusto com Spring-boot e MongoDB</li>
-                      </ul>
-                      Este projeto demonstra habilidades avançadas em desenvolvimento full-stack, incluindo arquitetura de sistemas distribuídos, comunicação em tempo real e design de APIs RESTful.
-                      <p><strong>Observação:</strong> O backend desta aplicação ainda está em desenvolvimento e em constante evolução para adicionar novas funcionalidades e melhorar o desempenho.</p>
                     </>
                   ) : selectedProject.title === 'Tabuada Interativa' ? (
                     <>
