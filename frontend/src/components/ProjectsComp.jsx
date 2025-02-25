@@ -150,14 +150,7 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
 }));
 
 const projects = [
-  {
-    title: 'Nexus API',
-    description: 'Uma API social completa com funcionalidades avançadas e interface de usuário moderna.',
-    image: nexusImage,
-    github: 'https://github.com/Neil-Lima/nexusapi',
-    demo: 'https://nexusapisocial.netlify.app/',
-    technologies: ['React', 'Spring-Boot', 'MongoDB', 'Express', 'JWT', 'Socket.io', 'Material-UI'],
-  },
+
   {
     title: 'Finanças Pessoais',
     description: 'Aplicativo completo de gerenciamento financeiro pessoal com recursos avançados de controle de despesas, orçamentos e investimentos.',
