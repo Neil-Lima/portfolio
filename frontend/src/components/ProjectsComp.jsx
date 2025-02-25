@@ -318,42 +318,42 @@ const ProjectsComp = () => {
         aria-describedby="project-modal-description"
       >
         <ModalContent>
-          <CloseButton onClick={handleCloseModal}>
-            <CloseIcon />
-          </CloseButton>
-          {selectedProject && (
-            <>
-              <Box sx={{ position: 'relative', width: '100%', [theme.breakpoints.up('md')]: { width: '50%' } }}>
-                <ModalImage 
-                  src={selectedProject.image} 
-                  alt={selectedProject.title} 
-                  style={{
-                    filter: selectedProject.title === 'Nexus API' ? 'brightness(0.5)' : 'none'
-                  }}
-                />
-                {selectedProject.title === 'Nexus API' && (
-                  <Box sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    zIndex: 2
-                  }}>
-                    <CircularProgress sx={{ color: 'white' }} />
-                    <Typography sx={{ 
-                      color: 'white', 
-                      mt: 2,
-                      fontWeight: 'bold',
-                      textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-                    }}>
-                      Em desenvolvimento
-                    </Typography>
-                  </Box>
-                )}
-              </Box>
+  <CloseButton onClick={handleCloseModal}>
+    <CloseIcon />
+  </CloseButton>
+  {selectedProject && (
+    <>
+      <ModalImage 
+        src={selectedProject.image} 
+        alt={selectedProject.title} 
+        style={{
+          filter: selectedProject.title === 'Nexus API' ? 'brightness(0.5)' : 'none'
+        }}
+      />
+      {selectedProject.title === 'Nexus API' && (
+        <Box sx={{
+          position: 'absolute',
+          top: '25%',
+          left: '25%',
+          transform: 'translate(-50%, -50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          zIndex: 2
+        }}>
+          <CircularProgress sx={{ color: 'white' }} />
+          <Typography sx={{ 
+            color: 'white', 
+            mt: 2,
+            fontWeight: 'bold',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}>
+            Em desenvolvimento
+          </Typography>
+        </Box>
+      )}
+      
+
               <ModalInfo>
                 <Typography id="project-modal-title" variant="h4" component="h2" sx={{ mb: 2, color: theme.palette.mode === 'dark' ? 'white' : 'black' }}>
                   {selectedProject.title}
