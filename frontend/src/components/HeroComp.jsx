@@ -3,7 +3,7 @@ import { Typography, Container, Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
-import curriculoPDF from '../assets/VICTOR NEIL BARATA LIMA.pdf';
+import curriculoPDF from '../assets/curriculo_victor_2025.pdf';
 
 const HeroSection = styled(Box)(({ theme }) => ({
   background:
