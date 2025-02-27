@@ -3,7 +3,7 @@ import { Typography, Container, Button, Box } from "@mui/material";
 import { styled } from "@mui/system";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useTheme } from "@mui/material/styles";
-import curriculoPDF from '../assets/curriculo_victor_2025.pdf';
+import curriculoPDF from '../assets/curriculo_victor .pdf';
 
 const HeroSection = styled(Box)(({ theme }) => ({
   background:
@@ -123,7 +123,7 @@ const HeroComp = () => {
             size="large"
             component="a"
             href={curriculoPDF}
-            download="VICTOR_NEIL_BARATA_LIMA_CV.pdf"
+            download="curriculo_victor .pdf"
           >
             Download CV
           </CTAButton>
