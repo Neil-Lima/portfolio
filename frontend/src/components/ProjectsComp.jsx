@@ -152,7 +152,7 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
 const projects = [
   {
     title: 'Nexus API',
-    description: 'Uma API social completa com funcionalidades avançadas e interface de usuário moderna. Código fonte não disponibilizado por ser um projeto pessoal.',
+    description: 'Uma API social completa com funcionalidades avançadas e interface de usuário moderna. Código fonte não disponível.',
     image: nexusImage,
     github: null,
     demo: 'https://nexusapiapp.netlify.app/',
@@ -261,30 +261,7 @@ const ProjectsComp = () => {
               <ProjectCard elevation={0} onClick={() => handleOpenModal(project)}>
                 <ProjectMedia image={project.image} title={project.title}>
                   <ProjectTitle variant="h5">{project.title}</ProjectTitle>
-                  {project.title === 'Nexus API' && (
-                    <Box sx={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      zIndex: 2
-                    }}>
-                      <CircularProgress sx={{ color: 'white' }} />
-                      <Typography 
-                        sx={{ 
-                          color: 'white', 
-                          mt: 2,
-                          fontWeight: 'bold',
-                          textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-                        }}
-                      >
-                        Em desenvolvimento
-                      </Typography>
-                    </Box>
-                  )}
+
                 </ProjectMedia>
                 <CardContent>
                 <Typography variant="body2" color={theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'textSecondary'} sx={{ mb: 2 }}>
@@ -327,31 +304,10 @@ const ProjectsComp = () => {
         src={selectedProject.image} 
         alt={selectedProject.title} 
         style={{
-          filter: selectedProject.title === 'Nexus API' ? 'brightness(0.5)' : 'none'
+filter: 'none'
         }}
       />
-      {selectedProject.title === 'Nexus API' && (
-        <Box sx={{
-          position: 'absolute',
-          top: '25%',
-          left: '25%',
-          transform: 'translate(-50%, -50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          zIndex: 2
-        }}>
-          <CircularProgress sx={{ color: 'white' }} />
-          <Typography sx={{ 
-            color: 'white', 
-            mt: 2,
-            fontWeight: 'bold',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }}>
-            Em desenvolvimento
-          </Typography>
-        </Box>
-      )}
+
       
 
               <ModalInfo>
@@ -371,8 +327,11 @@ const ProjectsComp = () => {
                         <li>Chat em tempo real com Socket.io</li>
                         <li>UI responsiva com Tailwind CSS</li>
                         <li>TypeScript para maior segurança</li>
+                        <li>Autenticação de dois fatores</li>
+                        <li>Recuperação de senha</li>
+                        <li>Envio de e-mails</li>
                       </ul>
-                      <p><strong>Observação:</strong> Este projeto está atualmente em desenvolvimento, com novas funcionalidades sendo implementadas.</p>
+                      <p><strong>Observação:</strong> Código fonte não disponível.</p>
                     </>
                   ) : selectedProject.title === 'Finanças Pessoais' ? (
                     <>
@@ -473,6 +432,13 @@ const ProjectsComp = () => {
                     </Button>
                     <Button variant="outlined" color="secondary" endIcon={<LaunchIcon />} href={selectedProject.demo} target="_blank">
                       Demo
+                    </Button>
+                  </Box>
+                )}
+                {selectedProject.title === 'Nexus API' && (
+                  <Box sx={{ display: 'flex', justifyContent: 'center', mt: 'auto' }}>
+                    <Button variant="outlined" color="secondary" endIcon={<LaunchIcon />} href={selectedProject.demo} target="_blank">
+                      Ver Demo
                     </Button>
                   </Box>
                 )}
