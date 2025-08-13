@@ -273,16 +273,33 @@ const ProjectsComp = () => {
                     ))}
                   </Box>
                 </CardContent>
-                {project.title !== 'Nexus API' && (
-                  <CardActions sx={{ justifyContent: 'space-between', px: 2, pb: 2 }}>
-                    <Button variant="contained" color="primary" startIcon={<GitHubIcon />} href={project.github} target="_blank">
-                      GitHub
-                    </Button>
-                    <Button variant="outlined" color="secondary" endIcon={<LaunchIcon />} href={project.demo} target="_blank">
-                      Demo
-                    </Button>
-                  </CardActions>
-                )}
+                <CardActions sx={{ justifyContent: 'space-between', px: 2, pb: 2 }}>
+                  {project.title === 'Nexus API' ? (
+                    <>
+                      <Button 
+                        variant="contained" 
+                        color="primary" 
+                        startIcon={<GitHubIcon />} 
+                        disabled
+                        sx={{ opacity: 0.5 }}
+                      >
+                        Código Indisponível
+                      </Button>
+                      <Button variant="outlined" color="secondary" endIcon={<LaunchIcon />} href={project.demo} target="_blank">
+                        Demo
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant="contained" color="primary" startIcon={<GitHubIcon />} href={project.github} target="_blank">
+                        GitHub
+                      </Button>
+                      <Button variant="outlined" color="secondary" endIcon={<LaunchIcon />} href={project.demo} target="_blank">
+                        Demo
+                      </Button>
+                    </>
+                  )}
+                </CardActions>
               </ProjectCard>
             </Grid>
           ))}
