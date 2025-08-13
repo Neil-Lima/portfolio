@@ -121,10 +121,10 @@ const EducationComp = () => {
                   Pós-Graduação em Desenvolvimento Web Full Stack e Cloud Computing
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
-                  Em andamento
+                  Concluído
                 </Typography>
                 <Typography variant="body2" sx={{ mt: 2 }}>
-                  Iniciado em abril de 2024, com previsão de conclusão de 6 a 18 meses.
+                  Iniciado em abril de 2024 e concluído em fevereiro de 2025.
                 </Typography>
                 <Typography variant="body2" sx={{ mt: 2 }}>
                   O curso aborda frontend, back-end e integração com serviços em nuvem, com amplo conhecimento em tecnologias como HTML5, CSS3, JavaScript, Bootstrap, Node.js, Next.js, React, Express.js, Docker e Kubernetes.
